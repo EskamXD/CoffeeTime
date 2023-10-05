@@ -27,4 +27,6 @@ It's simple time management system which helps people with integration during dr
 
 ### Docker
 
-1. Copy folder "docker" with config files and file "docker-compose.yml" from this repository to your destination folder.
+1. Clone repository or download it to your destination folder.
+2. Run "docker-compose up" in terminal in your destination folder.
+3. Open Web https://localhost:8080
