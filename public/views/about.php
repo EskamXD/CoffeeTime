@@ -11,14 +11,16 @@
     <meta name="keywords" content="kawiarnia, kawa, herbata, studenci, portfolio">
 
     <title>Pokój 315 - O nas</title>
-    <link rel="icon" href="../icons/webp_compressed/coffee-cup.webp">
+    <link rel="icon" href="public/icons/webp_compressed/coffee-cup.webp">
 
-    <link rel="stylesheet" media="screen and (min-width: 768px)" href="../css/pc.css">
-    <link rel="stylesheet" media="screen and (max-width: 768px)" href="../css/phone.css">
+    <link rel="stylesheet" media="screen and (min-width: 768px)" href="public/css/pc.css">
+    <link rel="stylesheet" media="screen and (max-width: 768px)" href="public/css/phone.css">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" type="text/css" href="public/css/fonts.css">
+
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap" rel="stylesheet"> -->
 </head>
 
 <body>
@@ -26,24 +28,7 @@
         <div id="button-arrow"></div>
     </button>
     <!-- Navigation bar -->
-    <header class="header content-flex" id="main">
-        <div class="content-row screen mobile-switch">
-            <!-- Logo -->
-            <a href="../index.html" class="logo"><img src="../icons/webp_compressed/coffee-cup.webp" alt="logo"></a>
-            <!-- Hamburger icon -->
-            <input class="side-menu" type="checkbox" id="side-menu" />
-            <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>
-            <!-- Menu -->
-            <nav class="nav">
-                <ul class="menu">
-                    <li><a href="../html/home.html">Home</a></li>
-                    <li><a href="../html/about.html">O nas</a> </li>
-                    <li><a href="../html/merch.html">Merch</a></li>
-                    <li><a href="../html/service.html">Serwis i usługi</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <?php include 'public/views/navbar.php'; ?>
     <!-- Title content -->
     <main class="title-screen content-flex">
         <div class="content-column screen">
@@ -52,11 +37,11 @@
             <!-- Social media icons -->
             <div class="social">
                 <a href="https://www.facebook.com/Urban4G" class="social-button" target="_blank"><img
-                        src="../icons/webp_compressed/facebook.webp" alt="Facebook link"></a>
+                        src="public/icons/webp_compressed/facebook.webp" alt="Facebook link"></a>
                 <a href="https://www.instagram.com/urbanseskam/" class="social-button" target="_blank"><img
-                        src="../icons/webp_compressed/instagram.webp" alt="Instagram link"></a>
+                        src="public/icons/webp_compressed/instagram.webp" alt="Instagram link"></a>
                 <a href="https://twitter.com/EskamXD" class="social-button" target="_blank"><img
-                        src="../icons/webp_compressed/twitter.webp" alt="Twitter link"></a>
+                        src="public/icons/webp_compressed/twitter.webp" alt="Twitter link"></a>
             </div>
             <div class="arrow-mobile arrow-pc">
                 <div id="arrow"></div>
@@ -77,7 +62,7 @@
     </section>
     <!-- Legends section -->
     <section class="scrolling-background scrolling-background-mobile content-flex"
-        style="background-image: url('../images/webp_compressed/galeria-slaw.webp'); background-size: contain;">
+        style="background-image: url('public/images/webp_compressed/galeria-slaw.webp'); background-size: contain;">
         <div class=" content-column screen"></div>
     </section>
     <!-- Kamil section -->
@@ -85,7 +70,7 @@
     <section class="content-flex">
         <div class="content-row screen reverse">
             <div class="image-border">
-                <img src="../images/webp_compressed/kamil.webp" alt="" loading="lazy">
+                <img src="public/images/webp_compressed/kamil.webp" alt="" loading="lazy">
             </div>
             <div class="list-text">
                 <h3>Kamil</h3>
@@ -102,7 +87,7 @@
                 <h2></h2>
             </div>
             <div class="image-border">
-                <img src="../images/webp_compressed/seba.webp" alt="" loading="lazy">
+                <img src="public/images/webp_compressed/seba.webp" alt="" loading="lazy">
             </div>
         </div>
     </section>
@@ -111,7 +96,7 @@
     <section class="content-flex">
         <div class="content-row screen reverse">
             <div class="image-border">
-                <img src="../images/webp_compressed/pawel.webp" alt="" loading="lazy">
+                <img src="public/images/webp_compressed/pawel.webp" alt="" loading="lazy">
             </div>
             <div class="list-text">
                 <h3>Paweł</h3>
@@ -128,7 +113,7 @@
                 <h2></h2>
             </div>
             <div class="image-border">
-                <img src="../images/webp_compressed/kuba.webp" alt="" loading="lazy">
+                <img src="public/images/webp_compressed/kuba.webp" alt="" loading="lazy">
             </div>
         </div>
     </section>
@@ -137,7 +122,7 @@
     <section class="content-flex">
         <div class="content-row screen reverse">
             <div class="image-border">
-                <img src="../images/webp_compressed/krzych.webp" alt="" loading="lazy" style="filter: grayscale(100%);">
+                <img src="public/images/webp_compressed/krzych.webp" alt="" loading="lazy" style="filter: grayscale(100%);">
             </div>
             <div class="list-text">
                 <h3>Krzychu</h3>
@@ -146,26 +131,8 @@
         </div>
     </section>
     <!-- Footer -->
-    <footer class="footer content-flex">
-        <div class="content-column screen" style="gap: 5%;">
-            <a href="#main" class="social-button"><img src="../icons/webp_compressed/coffee-cup.webp" alt="Logo"
-                    loading="lazy"></a>
-            <hr style="width: 60%; margin: 20px">
-            <!-- Social media icons -->
-            <div class="social">
-                <a href="https://www.facebook.com/Urban4G" class="social-button" target="_blank"><img
-                        src="../icons/webp_compressed/facebook.webp" alt="Facebook link"></a>
-                <a href="https://www.instagram.com/urbanseskam/" class="social-button" target="_blank"><img
-                        src="../icons/webp_compressed/instagram.webp" alt="Instagram link"></a>
-                <a href="https://twitter.com/EskamXD" class="social-button" target="_blank"><img
-                        src="../icons/webp_compressed/twitter.webp" alt="Twitter link"></a>
-            </div>
-            <p>
-                All rights reserved &copy; 2023 by <a href="Kamil Urbanowski" class="rights-name">Kamil Urbanowski</a>
-            </p>
-        </div>
-    </footer>
+    <?php include 'public/views/footer.php'; ?>
 </body>
-<script src="../js.js"></script>
+<script src="public/js.js"></script>
 
 </html>
