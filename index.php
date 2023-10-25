@@ -11,9 +11,6 @@ Routing::get('about', 'DefaultController');
 Routing::get('merch', 'DefaultController');
 Routing::get('book', 'DefaultController');
 Routing::get('notification', 'DefaultController');
-Routing::get('login', 'DefaultController');
-
-Routing::post('login', 'SecurityController');
 
 Routing::run($path);
 ?>
