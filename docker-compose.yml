@@ -2,18 +2,19 @@ version: '3'
 
 services:
   web:
-    build: 
+    build:
       context: .
-      dockerfile: docker/nginx/Dockerfile 
+      dockerfile: docker/nginx/Dockerfile
     ports:
       - "8080:80"
     volumes:
-      - .:/app
-    depends_on:
+      - .:/app/
+    links:
       - php
+
   php:
-    build: 
+    build:
       context: .
-      dockerfile: docker/php/Dockerfile 
+      dockerfile: docker/php/Dockerfile
     volumes:
-      - .:/app
+      - .:/app/

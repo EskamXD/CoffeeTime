@@ -17,10 +17,6 @@
     <link rel="stylesheet" type="text/css" media="screen and (max-width: 768px)" href="public/css/phone.css">
     
     <link rel="stylesheet" type="text/css" href="public/css/fonts.css">
-    
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap" rel="stylesheet"> -->
 </head>
 
 <body>

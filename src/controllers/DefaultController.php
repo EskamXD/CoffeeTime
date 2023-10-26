@@ -23,18 +23,6 @@ class DefaultController extends AppController {
     public function notification() {
         $this->render('notification');
     }
-
-    public function login() {
-        $this->render('login');
-    }
-
-    public function register() {
-        $this->render('register');
-    }
-
-    public function logout() {
-        $this->render('home');
-    }
 }
 
 ?>

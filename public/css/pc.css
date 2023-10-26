@@ -210,6 +210,46 @@ li {
   height: 4vw;
 }
 
+.input {
+  display: inline-block;
+  position: relative;
+
+  background-color: transparent;
+  color: var(--black);
+  font-size: 1.2em;
+  font-weight: 300;
+
+  width: 350px;
+  height: 70px;
+
+  border: none;
+  border-bottom: solid var(--dirty-white) 2px;
+  outline: none;
+}
+.input::placeholder {
+  color: var(--black);
+  font-size: 1.2em;
+  font-weight: 300;
+}
+.input::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+  background-color: var(--white);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+.input:focus::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+
 .image-border {
   display: flex;
   align-items: center;
@@ -314,6 +354,17 @@ li {
 /*
 * R
 */
+.radio-button {
+  display: none;
+}
+.radio-button:checked ~ .radio-text {
+  opacity: 1;
+}
+.radio-text {
+  color: var(--white);
+  opacity: 0.6;
+}
+
 .responsive-iframe {
   position: absolute;
   top: 0;
