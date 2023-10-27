@@ -83,6 +83,17 @@ li {
 /*
 * B
 */
+.button {
+  width: 350px;
+  height: 70px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 3px white solid;
+  border-radius: 20px;
+  background-color: transparent;
+}
+
 #button-arrow {
   border: solid var(--black);
   border-width: 5px 5px 0 0;
