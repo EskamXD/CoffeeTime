@@ -5,27 +5,35 @@ require_once 'AppController.php';
 class DefaultController extends AppController {
     
     public function index() {
-        $this->render('home');
+        $this->render('home', []);
     }
 
     public function about() {
-        $this->render('about');
+        $this->render('about', []);
     }
 
     public function merch() {
-        $this->render('merch');
+        $this->render('merch', []);
     }
 
     public function book() {
-        $this->render('book');
+        $this->render('book', ["messages" => ["Umów się!"]]);
     }
 
     public function notification() {
-        $this->render('notification');
+        $this->render('notification', []);
     }
 
-    public function login() {
-        $this->render('login');
+    public function loginPage() {
+        $this->render('loginPage', []);
+    }
+
+    public function logoutPage() {
+        $this->render('logoutPage', []);
+    }
+
+    public function settings() {
+        $this->render('settings', []);
     }
 }
 

@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <html>
 
 <head>
@@ -12,63 +16,62 @@
 
     <title>Pokój 315 - Strona główna</title>
     <link rel="icon" href="public/icons/webp_compressed/coffee-cup.webp">
-    
-    <link rel="stylesheet" type="text/css" media="screen and (min-width: 768px)" href="public/css/pc.css">
-    <link rel="stylesheet" type="text/css" media="screen and (max-width: 768px)" href="public/css/phone.css">
-    
-    <link rel="stylesheet" type="text/css" href="public/css/fonts.css">
 </head>
 
 <body>
-    <button onclick="topFunction()" id="button-top" title="Go to top">
-        <div id="button-arrow"></div>
-    </button>
+    <!-- Top arrow -->
+    <?php include 'public/views/top-arrow.php'; ?>
     <!-- Navigation bar -->
     <?php include 'public/views/navbar.php'; ?>
     <!-- Title content -->
-    <main class="title-screen content-flex">
-        <div class="content-column screen">
-            <h2>Tutaj zaczyna się dobra znajomość...</h2>
+    <main class="content-flex screen-height">
+        <div class="content-column">
+            <h1>Tutaj zaczyna się dobra znajomość...</h2>
             <!-- Social media icons -->
-            <div class="social">
-                <a href="https://www.facebook.com/Urban4G" class="social-button image-hover" target="_blank"><img
+            <div class="content-row content-around">
+                <a href="https://www.facebook.com/Urban4G" class="icon hover-scale" target="_blank"><img
                         src="public/icons/webp_compressed/facebook.webp" alt="Facebook link"></a>
-                <a href="https://www.instagram.com/urbanseskam/" class="social-button image-hover" target="_blank"><img
+                <a href="https://www.instagram.com/urbanseskam/" class="icon hover-scale" target="_blank"><img
                         src="public/icons/webp_compressed/instagram.webp" alt="Instagram link"></a>
-                <a href="https://twitter.com/EskamXD" class="social-button image-hover" target="_blank"><img
+                <a href="https://twitter.com/EskamXD" class="icon hover-scale" target="_blank"><img
                         src="public/icons/webp_compressed/twitter.webp" alt="Twitter link"></a>
             </div>
-            <div class="arrow-mobile">
-                <div id="arrow"></div>
+            <div class="arrow">
             </div>
         </div>
     </main>
     <!-- Coffee section -->
-    <section class="coffee content-flex">
-        <div class="content-row screen">
-            <div class="list-text">
-                <h3>Kawusia studencka</h3>
-                <ul>
-                    <li>• Kawa Czarna</li>
-                    <li>• Kawa Biała</li>
-                    <li>• Latte Macchiato</li>
-                </ul>
+    <section class="content-flex screen-height bg-white">
+        <div class="content-row content-beetwen content-wrap screen-width">
+            <div class="content-column content-beetwen gap-h-10">
+                <div class="content-column">
+                    <h2 class="black">Kawusia studencka</h3>
+                    <p class="black">Potrzebujesz z kimś pogadać, wypić dobrą kawę?</p>
+                </div>
+                <div class="content-flex">
+                    <button class="big black hover-scale">Umów się na kawę</button>
+                </div>
             </div>
-            <div class="image-border">
-                <img src="public/images/webp_compressed/coffee1.webp" alt="Photo" loading="lazy">
+            <div class="content-flex">
+                <img src="public/images/webp_compressed/coffee1.webp" alt="Photo" loading="lazy" class="image-round">
             </div>
         </div>
     </section>
     <!-- Scrolling background, coffee price -->
-    <section class="scrolling-background scrolling-background-mobile content-flex"
-        style="background-image: url('public/images/webp_compressed/coffee2.webp');">
-        <div class="content-column screen">
-            <h2>Wszystkie kawy 2,50&nbsp;PLN!</h2>
+    <section class="content-flex screen-height"
+        style="background-image: url('public/images/webp_compressed/coffee2.webp'); background-attachment: fixed; background-size: cover;">
+        <div class="content-column gap-h-10">
+            <div class="content-column">
+                <h2>Nie masz jeszcze konta?</h2>
+                <p>Dołącz do nas już dziś!</p>
+            </div>
+            <div class="content-flex">
+                <button class="big hover-scale">Dołącz</button>
+            </div>
         </div>
     </section>
     <!-- Footer -->
     <?php include 'public/views/footer.php'; ?>
 </body>
-<script src="js.js"></script>
 
 </html>
