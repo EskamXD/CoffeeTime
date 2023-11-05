@@ -1,16 +1,4 @@
 <?php 
-// Ustaw nazwę sesji (jeśli potrzebujesz zmienić domyślną nazwę "PHPSESSID")
-session_name("UserSession");
-
-// Konfiguruj parametry ciasteczka sesji (opcjonalne)
-$sessionParams = session_get_cookie_params();
-$sessionParams['lifetime'] = 3600; // Ustaw czas życia sesji na 1 godzinę
-$sessionParams['path'] = '/'; // Dostępne na całej stronie
-$sessionParams['secure'] = true; // Wymaga protokołu HTTPS
-$sessionParams['httponly'] = true; // Zapobiega dostępowi z poziomu JavaScript
-
-session_set_cookie_params($sessionParams);
-
 // Rozpocznij sesję
 session_start();
 

@@ -1,5 +1,12 @@
 <?php
+    // Ustaw nazwę sesji (jeśli potrzebujesz zmienić domyślną nazwę "PHPSESSID")
+    // session_name("UserSession");
     session_start();
+
+    // session_set_cookie_params($sessionParams);
+    setcookie(session_name(), session_id(), 3600, '/', 'localhost', true, true);
+
+    $securityController = new SecurityController();
 ?>
 
 <html>
