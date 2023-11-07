@@ -5,7 +5,7 @@ class DatabaseController {
 
     public function __construct() {
         // Ustaw połączenie z bazą danych (dostosuj do własnych parametrów).
-        $this->db = new PDO('pgsql:host=localhost;port=5432;dbname=test_db', 'root', 'root', ["sslmode" => "prefer"]);
+        $this->db = new PDO('pgsql:host=172.19.0.2;port=5432;dbname=test_db', 'root', 'root', ["sslmode" => "prefer"]);
     }
 
     public function getUserByLogin($login) {
@@ -13,6 +13,8 @@ class DatabaseController {
         $stmt->bindParam(':login', $login);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        // var_dump($user);
+        // die();
 
         if ($user) {
             return new User(

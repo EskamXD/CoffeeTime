@@ -8,11 +8,11 @@ class User {
     private $name;
     private $surname;
 
-    public function __construct(int $id, string $email, string $password, string $login, string $name, string $surname) {
+    public function __construct($id, string $email, string $login, string $password, string $name, string $surname) {
         $this->id = $id;
         $this->email = $email;
-        $this->password = $password;
         $this->login = $login;
+        $this->password = $password;
         $this->name = $name;
         $this->surname = $surname;
     }
@@ -21,12 +21,12 @@ class User {
         return $this->email;
     }
 
-    public function getPassword(): string {
-        return $this->password;
-    }
-
     public function getLogin(): string {
         return $this->login;
+    }
+
+    public function getPassword(): string {
+        return $this->password;
     }
 
     public function getName(): string {
@@ -40,13 +40,13 @@ class User {
     public function setEmail(string $email) {
         $this->email = $email;
     }
+    
+    public function setLogin(string $login) {
+        $this->login = $login;
+    }
 
     public function setPassword(string $password) {
         $this->password = $password;
-    }
-
-    public function setLogin(string $login) {
-        $this->login = $login;
     }
 
     public function setName(string $name) {

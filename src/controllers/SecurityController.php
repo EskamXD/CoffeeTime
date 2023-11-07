@@ -10,9 +10,13 @@ class SecurityController extends AppController {
     public function __construct() {
         parent::__construct();
         $this->databaseController = new DatabaseController();
+        // var_dump($this->databaseController);
+        // die();
     }
 
     public function login() {
+        // $user = new User(1, 'ktos@cos.pl', '1234', 'admin', 'Janusz', 'Promocja');
+
         if (!$this->isPost()) {
             return $this->render('loginPage', ['messages' => ['Błąd logowania!']]);
         }
@@ -21,6 +25,8 @@ class SecurityController extends AppController {
         $password = $_POST['password-input'];
 
         // Pobierz użytkownika z bazy danych przy użyciu DatabaseController.
+        // var_dump($this->databaseController->getUserByLogin($login));
+        // die();
         $user = $this->databaseController->getUserByLogin($login);
 
         if (!$user) {
@@ -28,8 +34,11 @@ class SecurityController extends AppController {
             return;
         }
 
+        // var_dump($password, $user->getPassword());
+        // die();
+        
         // Sprawdź, czy hasło pasuje do hasła w bazie danych.
-        if (!password_verify($password, $user->getPassword())) {
+        if ($password !== $user->getPassword()) {
             $this->render('loginPage', ['messages' => ['Nieprawidłowe hasło!']]);
             return;
         }
