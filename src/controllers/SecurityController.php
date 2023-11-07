@@ -25,17 +25,12 @@ class SecurityController extends AppController {
         $password = $_POST['password-input'];
 
         // Pobierz użytkownika z bazy danych przy użyciu DatabaseController.
-        // var_dump($this->databaseController->getUserByLogin($login));
-        // die();
         $user = $this->databaseController->getUserByLogin($login);
 
         if (!$user) {
             $this->render('loginPage', ['messages' => ['Nieprawidłowy login!']]);
             return;
         }
-
-        // var_dump($password, $user->getPassword());
-        // die();
         
         // Sprawdź, czy hasło pasuje do hasła w bazie danych.
         if ($password !== $user->getPassword()) {
@@ -44,6 +39,7 @@ class SecurityController extends AppController {
         }
 
         // Udało się zalogować, ustaw sesję z danymi użytkownika.
+        $_SESSION['user_id'] = $user->getId();
         $_SESSION['user'] = $user->getLogin();
         $_SESSION['email'] = $user->getEmail();
         $_SESSION['name'] = $user->getName();

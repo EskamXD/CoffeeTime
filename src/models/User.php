@@ -8,13 +8,23 @@ class User {
     private $name;
     private $surname;
 
-    public function __construct($id, string $email, string $login, string $password, string $name, string $surname) {
+    public function __construct(int $id, string $email, string $login, string $password, string $name, string $surname) {
+        // echo 'User constructor | ';
+        // var_dump($id, $email, $login, $password, $name, $surname);
+        // die();
         $this->id = $id;
         $this->email = $email;
         $this->login = $login;
         $this->password = $password;
         $this->name = $name;
         $this->surname = $surname;
+    }
+
+    public function getId(): int {
+        // echo 'getId | ';
+        // var_dump($this->id, (int)$this->id);
+        // die();
+        return $this->id;
     }
 
     public function getEmail(): string {

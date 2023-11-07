@@ -23,6 +23,7 @@
 </head>
 
 <body>
+    <?php var_dump($_SESSION); ?>
     <!-- Top arrow -->
     <?php include 'public/views/top-arrow.php'; ?>
     <!-- Navbar -->
@@ -41,7 +42,7 @@
                         if(isset($_SESSION['photo'])) {
                             echo '<img class="image-circle black profile" src="public/uploads/'.$_SESSION['photo'].'" alt="Profilowe">';
                         } else {
-                            echo '<img class="image-circle black profile" src="public/icons/webp_compressed/coffee-cup.webp" alt="Profilowe">';
+                            echo '<img class="image-circle black profile" src="public/icons/webp_compressed/profile.webp" alt="Profilowe">';
                         }
                     ?>
                     <label class="button black hover-scale">
@@ -51,47 +52,26 @@
                 </div>
                 <div class="content-row content-beetwen relative">
                     <?php
-                        if(isset($_SESSION['user'])) {
-                            echo '  <input id="input-settings-user" type="text" name="user" placeholder="'.$_SESSION['user'].'" required disabled>
-                                    <span class="border black"></span>';
-                        } else {
-                            // TODO: Add redirect to login page
-                            echo '  <input id="input-settings-user" type="text" name="user" placeholder="Nazwa użytkownika" required disabled>
-                                    <span class="border black"></span>';                            
-                        }
+                        echo '  <input id="input-settings-user" type="text" name="user" placeholder="'.$_SESSION['user'].'" disabled>
+                                <span class="border black"></span>';
                     ?>
                 </div>
                 <div class="content-row content-beetwen relative">
                     <?php
-                        if(isset($_SESSION['user'])) {
-                            echo '  <input id="input-settings-name" type="text" name="name" placeholder="'.$_SESSION['name'].'" required disabled>
-                                    <span class="border black"></span>';
-                        } else {
-                            echo '  <input id="input-settings-name" type="text" name="name" placeholder="Imię" required disabled>
-                                    <span class="border black"></span>';
-                        }
+                        echo '  <input id="input-settings-name" type="text" name="name" placeholder="'.$_SESSION['name'].'" disabled>
+                                <span class="border black"></span>';
                     ?>
                 </div>
                 <div class="content-row content-beetwen relative">
                     <?php
-                        if(isset($_SESSION['user'])) {
-                            echo '  <input id="input-settings-surname" type="text" name="surname" placeholder="'.$_SESSION['surname'].'" required disabled>
-                                    <span class="border black"></span>';
-                        } else {
-                            echo '  <input id="input-settings-surname" type="text" name="surname" placeholder="Nazwisko" required disabled>
-                                    <span class="border black"></span>';
-                        }
+                        echo '  <input id="input-settings-surname" type="text" name="surname" placeholder="'.$_SESSION['surname'].'" disabled>
+                                <span class="border black"></span>';
                     ?>
                 </div>
                 <div class="content-row content-beetwen relative">
                     <?php
-                        if(isset($_SESSION['user'])) {
-                            echo '  <input id="input-settings-email" type="email" name="email" placeholder="'.$_SESSION['email'].'" required disabled>
-                                    <span class="border black"></span>';
-                        } else {
-                            echo '  <input id="input-settings-email" type="email" name="email" placeholder="Email" required disabled>
-                                    <span class="border black"></span>';
-                        }
+                        echo '  <input id="input-settings-email" type="email" name="email" placeholder="'.$_SESSION['email'].'" disabled>
+                                <span class="border black"></span>';
                     ?>
                 </div>
                 <div class="content-row content-around">
