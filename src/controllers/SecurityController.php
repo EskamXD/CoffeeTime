@@ -47,4 +47,29 @@ class SecurityController extends AppController {
 
         return $this->render('home', ['messages' => ['Witaj '.$user->getName().'!</br>', 'Umów się!']]);
     }
+
+    public function logout() {
+        session_unset();
+        session_destroy();
+
+        $this->render('home', ['messages' => ['Wylogowano!']]);
+    }
+
+    public function register() {
+        if (!$this->isPost()) {
+            return $this->render('register', ['messages' => ['Błąd logowania!']]);
+        }
+
+        $login = $_POST['register-login'];
+        $password = $_POST['register-password'];
+        $passwordCheck = $_POST['register-password-check'];
+        $email = $_POST['register-email'];
+        $name = $_POST['register-name'];
+        $surname = $_POST['register-surname'];
+        $birthday = $_POST['register-birthday'];
+        $room = $_POST['register-room'];
+
+        // var_dump($login, $password, $passwordCheck, $email, $name, $surname, $birthday, $room);
+        // die();
+    }
 }

@@ -53,7 +53,7 @@
                 </div>
                 <!-- <div class="g-signin2" data-onsuccess="onSignIn" style="width: 350px; height: 70px; border-radius: 20px !important;"></div> -->
                 <button id="button" type="submit" class="hover-scale">Zaloguj</button>
-                <p>Nie masz konta? <strong><a href="/register" style="font-family: Roboto;">Zarejestruj się</a></strong></p>
+                <p>Nie masz konta? <strong><a href="/registerPage" style="font-family: Roboto;">Zarejestruj się</a></strong></p>
                 <p>
                     <?php 
                         if(isset($messages)) {

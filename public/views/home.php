@@ -49,7 +49,7 @@
                     <p class="black">Potrzebujesz z kimś pogadać, wypić dobrą kawę?</p>
                 </div>
                 <div class="content-flex">
-                    <button class="big black hover-scale">Umów się na kawę</button>
+                    <a href="/book"><button class="big black hover-scale">Umów się na kawę</button></a>
                 </div>
             </div>
             <div class="content-flex">

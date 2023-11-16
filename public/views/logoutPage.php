@@ -1,5 +1,6 @@
 <?php
-    session_destroy();
+    require_once __DIR__.'/../../src/controllers/SecurityController.php';
     
-    header('Location: /');
+    $logout = new SecurityController();
+    $logout->logout();
 ?>

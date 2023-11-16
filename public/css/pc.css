@@ -388,6 +388,11 @@ input[type="radio"]:checked ~ label {
     min-height: calc(100vh - 65px);
 }
 
+.screen-height-80 {
+    min-height: calc(100vh - 65px - 20vh);
+
+}
+
 .screen-width {
     width: 80%;
 }
