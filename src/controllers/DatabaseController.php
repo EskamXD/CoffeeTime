@@ -32,30 +32,6 @@ class DatabaseController extends AppController{
         
         return $stmt;
     }
-    
-    public function getUserByLogin($login) {
-        $stmt = $this->db->prepare("SELECT * FROM users WHERE login = :login");
-        $stmt->bindParam(':login', $login);
-        $stmt->execute();
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // echo 'getUserByLogin | ';
-        // var_dump((int)$user['userId'],  gettype($user['userId']));
-        // die();
-
-        if ($user) {
-            return new User(
-                $user['userid'],
-                $user['email'],
-                $user['login'],
-                $user['password'],
-                $user['name'],
-                $user['surname']
-            );
-        }
-
-        return null;
-    }
 
     public function testConnection() {
         $stmt = $this->db->prepare("SELECT * FROM users");
@@ -63,7 +39,7 @@ class DatabaseController extends AppController{
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($users as $user) {
-            echo $user['userid'] . ' ' . $user['login'] . ' ' . $user['email'] . '<br>';
+            echo $user['user_id'] . ' ' . $user['login'] . ' ' . $user['email'] . '<br>';
         }
     }
 }

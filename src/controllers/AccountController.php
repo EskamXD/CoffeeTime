@@ -8,29 +8,30 @@ require_once 'src/repositories/UserRepo.php'; // Dodaj nowy plik dla UserRepo, g
 
 class AccountController extends AppController {
     public function createAccount() {
-        // Możesz zaimplementować tworzenie konta użytkownika tutaj za pomocą UserRepo.
-        // Przykład:
         $userRepo = new UserRepo();
         $userRepo->createUser($_POST['email'], $_POST['user'], $_POST['password'], $_POST['name'], $_POST['surname']);
-
-        // Przekierowanie lub inne akcje po utworzeniu konta
     }
 
     public function updateAccount() {
         if ($this->isPost()) {
             // Jeśli przekazano plik, dodaj go do zdjęć
-            if (isset($_FILES['file'])) {
-                $photo = new PhotoController();
-                $photo->addPhoto($_FILES['file']);
+            if (isset($_FILES['profilePhoto']) && $_FILES['profilePhoto']['name'] != '') {
+                if ($_FILES['profilePhoto']['error'] == 0) {
+                    $photo = new PhotoController();
+                    $photo->addPhoto($_FILES['profilePhoto']);
+                }
+                else {
+                    echo 'Wystąpił błąd podczas przesyłania zdjęcia <br>';
+                    var_dump($_FILES['profilePhoto']['error']);
+                    die();
+                }
             }
 
-            
             // Pobierz istniejące dane użytkownika z sesji
             $user = $_SESSION['user'];
             $name = $_SESSION['name'];
             $surname = $_SESSION['surname'];
-            $email = $_SESSION['email'];
-            
+            $email = $_SESSION['email'];            
             
             // Aktualizuj dane użytkownika, jeśli zostaną przekazane przez formularz
             if (isset($_POST['name']) && !empty($_POST['name'])) {

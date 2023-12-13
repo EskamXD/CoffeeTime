@@ -3,13 +3,12 @@
 require_once 'src/repositories/Repo.php';
 
 class PhotoRepo extends Repo {
-    public function updatePhoto($userId, $photoName, $photoPath) {
+    public function updatePhoto($userId, $photo_name) {
         // Dodanie zdjęcia do bazy danych.
-        $sql = "INSERT INTO photos (user_id, name, path) VALUES (:userId, :photoName, :photoPath)";
+        $sql = "INSERT INTO photos (user_id, name) VALUES (:userId, :photo_name)";
         $params = array(
             ':userId' => $userId,
-            ':photoName' => $photoName,
-            ':photoPath' => $photoPath
+            ':photo_name' => $photo_name,
         );
 
         $this->db->execute($sql, $params);
@@ -24,7 +23,7 @@ class PhotoRepo extends Repo {
     }
 
     public function getPhotos($userId) {
-        // Pobranie wszystkich zdjęć użytkownika o określonym $userId.
+        // Pobranie wszystkich zdjęć użytkownika o określonym $user_id.
         $sql = "SELECT * FROM photos WHERE user_id = :userId";
         $params = array(':userId' => $userId);
 

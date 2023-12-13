@@ -40,12 +40,7 @@
                     echo '  <a href="/loginPage" class="icon hover-scale"><img src="public/icons/oryginal/account-white.png"
                             alt="Login icon"></a>';
                         } else {
-                            if (isset($_SESSION['photo'])) {
-                                $photo = $_SESSION['photo'];
-                            } else {
-                                $photo = 'public/icons/webp_compressed/coffee-cup.webp';
-                            }
-                            echo '  <a href="/logoutPage" class="icon hover-scale"><img class="image-circle" src="'.$photo.'"
+                            echo '  <a href="/logoutPage" class="icon hover-scale"><img class="image-circle" src="'.$_SESSION['profilePhoto'].'"
                             alt="Login icon"></a>';
                         }
                         ?>

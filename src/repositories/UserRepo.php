@@ -19,13 +19,13 @@ class UserRepo extends Repo {
 
     public function updateUser($userId, $newEmail, $newName, $newSurname) {
         // Aktualizacja danych użytkownika o określonym $userId.
-        $sql = "UPDATE users SET email = :newEmail, name = :newName, surname = :newSurname WHERE userid = :userid";
+        $sql = "UPDATE users SET email = :newEmail, name = :newName, surname = :newSurname WHERE user_id = :userId";
 
         $params = array(
             ':newEmail' => $newEmail,
             ':newName' => $newName,
             ':newSurname' => $newSurname,
-            ':userid' => $userId
+            ':userId' => $userId
         );
 
         // echo 'updateUser | ';

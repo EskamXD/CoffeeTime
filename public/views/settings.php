@@ -23,7 +23,10 @@
 </head>
 
 <body>
-    <?php var_dump($_SESSION); ?>
+    <?php 
+        var_dump($_SESSION);
+        var_dump($_FILES);
+    ?>
     <!-- Top arrow -->
     <?php include 'public/views/top-arrow.php'; ?>
     <!-- Navbar -->
@@ -32,21 +35,18 @@
     <main class="content-row screen-height">
         <div class="content-column half-smaller screen-height mobile-display-none">
             <h3 class="black">Konto</h3>
-            <h3 class="black">Ustawienia</h3>
+            <!-- <h3 class="black">Ustawienia</h3> -->
         </div>
         <div class="content-column half-bigger screen-height bg-white round-left mobile-display-full">
+            <!-- Form using function updateAccount from AccountController -->
             <form id="account" class="content-column gap-h-5" action="updateAccount" method="POST" enctype="multipart/form-data">
                 <h3 class="black">Konto</h3>
                 <div class="content-column gap-h-5">
                     <?php 
-                        if(isset($_SESSION['photo'])) {
-                            echo '<img class="image-circle black profile" src="public/uploads/'.$_SESSION['photo'].'" alt="Profilowe">';
-                        } else {
-                            echo '<img class="image-circle black profile" src="public/icons/webp_compressed/profile.webp" alt="Profilowe">';
-                        }
+                        echo '<img class="image-circle black profile" src="'.$_SESSION['profilePhoto'].'" alt="Profilowe">';
                     ?>
-                    <label class="button black hover-scale">
-                        <input type="file" style="display: none;">
+                    <label id="input-settings-photo-label" class="content-flex button black hover-scale hide" disabled>
+                        <input id="input-settings-photo" type="file" name="profilePhoto" class="hide" disabled>
                         Zmień zdjęcie
                     </label>
                 </div>

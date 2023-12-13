@@ -33,3 +33,5 @@ RUN apk add --no-cache --virtual .run-deps $RUN_DEPS
 COPY . /app
 
 VOLUME ["/app"]
+
+COPY ./docker/php/php.ini /usr/local/etc/php/conf.d/php.ini

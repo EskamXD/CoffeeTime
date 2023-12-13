@@ -12,6 +12,7 @@ Routing::get('', 'DefaultController');
 Routing::get('about', 'DefaultController');
 Routing::get('book', 'DefaultController');
 Routing::get('index', 'DefaultController');
+Routing::get('info', 'DefaultController');
 Routing::get('loginPage', 'DefaultController');
 Routing::get('logoutPage', 'DefaultController');
 Routing::get('merch', 'DefaultController');

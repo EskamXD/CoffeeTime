@@ -12,7 +12,7 @@ services:
     links:
       - php
     networks:
-      - hwdp
+      hwdp:
 
   php:
     build:
@@ -21,7 +21,7 @@ services:
     volumes:
       - .:/app/
     networks:
-      - hwdp
+      hwdp:
 
   db:
     container_name: pg_container
@@ -34,7 +34,8 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - hwdp
+      hwdp:
+        ipv4_address: 172.19.0.3
       
   pgadmin:
     container_name: pgadmin4_container
@@ -46,8 +47,12 @@ services:
     ports:
       - "5050:80"
     networks:
-      - hwdp
+      hwdp:
 
 networks:
   hwdp:
     driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.19.0.0/16

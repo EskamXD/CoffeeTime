@@ -254,6 +254,7 @@ form > div {
 
 .hide {
     display: none;
+    cursor: default;
 }
 
 .hover-scale {
