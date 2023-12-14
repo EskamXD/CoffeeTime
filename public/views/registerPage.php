@@ -1,7 +1,3 @@
-<?php
-    session_start();
-?>
-
 <html>
 <head>
     <!DOCTYPE html>
@@ -36,36 +32,32 @@
                 ?>
             </h3>
             <div class="relative">
-                <input type="text" name="register-login" placeholder="Login" required> 
+                <input type="text" name="login" placeholder="Login" required> 
                 <span class="border"></span>
             </div>
             <div class="relative">
-                <input type="password" id="register-password" name="register-password" placeholder="Hasło" required> 
+                <input type="password" id="password" name="register-password" placeholder="Hasło" required> 
                 <span class="border"></span>
             </div>
             <div class="relative">
-                <input type="password" id="register-password-check" name="register-password-check" placeholder="Powtórz hasło" required> 
+                <input type="password" id="password-check" name="register-password-check" placeholder="Powtórz hasło" required> 
                 <span class="border"></span>
             </div>
             <p id="password-error" class="error-message"></p>
             <div class="relative">
-                <input type="text" name="register-email" placeholder="Email" required> 
+                <input type="text" name="email" placeholder="Email" required> 
                 <span class="border"></span>
             </div>
             <div class="relative">
-                <input type="text" name="register-name" placeholder="Imię" required> 
+                <input type="text" name="name" placeholder="Imię" required> 
                 <span class="border"></span>
             </div>
             <div class="relative">
-                <input type="text" name="register-surname" placeholder="Nazwisko" required> 
+                <input type="text" name="surname" placeholder="Nazwisko" required> 
                 <span class="border"></span>
             </div>
             <div class="relative">
-                <input type="date" name="register-birthday" placeholder="Data urodzenia" required> 
-                <span class="border"></span>
-            </div>
-            <div class="relative">
-                <input type="number" name="register-room" placeholder="Numer pokoju" required> 
+                <input type="number" name="roomNumber" placeholder="Numer pokoju" required> 
                 <span class="border"></span>
             </div>
             <button class="hover-scale" onclick="formSubmit()">Zarejestruj się</button>
@@ -78,8 +70,8 @@
 <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Pobranie referencji do pól hasła
-            var passwordInput = document.getElementById('register-password');
-            var confirmPasswordInput = document.getElementById('register-password-check');
+            var passwordInput = document.getElementById('password');
+            var confirmPasswordInput = document.getElementById('password-check');
             var passwordError = document.getElementById('password-error');
 
             // Dodanie zdarzeń do pól hasła
@@ -90,14 +82,19 @@
                 var password = passwordInput.value;
                 var confirmPassword = confirmPasswordInput.value;
 
+                passwordError.textContent = 'Hasło musi ';
+
                 // Sprawdzenie minimalnych wymogów bezpieczeństwa
                 var isValid = true;
                 if (password.length < 8) {
                     isValid = false;
-                    passwordError.textContent = 'Hasło musi mieć co najmniej 8 znaków.';
-                } else if (!/[a-z]/.test(password) || !/[A-Z]/.test(password) || !/\d/.test(password)) {
+                    passwordError.textContent += 'mieć co najmniej 8 znaków';
+                } else {
+                    passwordError.textContent = '';
+                }
+                if (!/[a-z]/.test(password) || !/[A-Z]/.test(password) || !/\d/.test(password)) {
                     isValid = false;
-                    passwordError.textContent = 'Hasło musi zawierać małą literę, dużą literę i cyfrę.';
+                    passwordError.textContent += ', zawierać małą literę, dużą literę i cyfrę.';
                 } else {
                     passwordError.textContent = '';
                 }
@@ -118,8 +115,8 @@
         });
 
         function formSubmit() {
-            var password = document.getElementById('register-password').value;
-            var confirmPassword = document.getElementById('register-password-check').value;
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('password-check').value;
 
             // alert("działam");
 

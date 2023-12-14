@@ -7,8 +7,9 @@ class User {
     private $login;
     private $name;
     private $surname;
+    private $room_number;
 
-    public function __construct(int $id, string $email, string $login, string $password, string $name, string $surname) {
+    public function __construct(int $id, string $email, string $login, string $password, string $name, string $surname, int $room_number) {
         // echo 'User constructor | ';
         // var_dump($id, $email, $login, $password, $name, $surname);
         // die();
@@ -18,6 +19,7 @@ class User {
         $this->password = $password;
         $this->name = $name;
         $this->surname = $surname;
+        $this->room_number = $room_number;
     }
 
     public function getId(): int {
@@ -47,6 +49,10 @@ class User {
         return $this->surname;
     }
 
+    public function getRoomNumber(): int {
+        return $this->room_number;
+    }
+
     public function setEmail(string $email) {
         $this->email = $email;
     }
@@ -65,5 +71,9 @@ class User {
 
     public function setSurname(string $surname) {
         $this->surname = $surname;
+    }
+
+    public function setRoomNumber(int $room_number) {
+        $this->room_number = $room_number;
     }
 }

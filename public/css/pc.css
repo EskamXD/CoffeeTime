@@ -256,7 +256,6 @@ form > div {
     display: none;
     cursor: default;
 }
-
 .hover-scale {
     transition: 0.25s ease-out;
 }
@@ -286,6 +285,10 @@ input {
 }
 input::placeholder {
     color: var(--gray)
+}
+input:disabled {
+    cursor: default !important;
+    opacity: 0.6;
 }
 input ~ .border {
     position: absolute;
@@ -351,8 +354,8 @@ input[type="radio"]:checked ~ label {
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 80%;
-    max-height: 80%;
+    width: 200px;
+    height: 200px;
 }
 .image-round {
     border-radius: 5%;

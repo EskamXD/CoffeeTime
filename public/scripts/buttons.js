@@ -22,10 +22,10 @@ document.getElementById("edit-button").addEventListener("click", function() {
     document.getElementById("input-settings-photo-label").classList.add("hide");
 
 
-    // document.getElementById("input-settings-user").getAttribute("disabled");
-    document.getElementById("input-settings-name").getAttribute("disabled");
-    document.getElementById("input-settings-surname").getAttribute("disabled");
-    document.getElementById("input-settings-email").getAttribute("disabled");
+    // document.getElementById("input-settings-user").setAttribute("disabled", "disabled");
+    document.getElementById("input-settings-name").setAttribute("disabled", "disabled");
+    document.getElementById("input-settings-surname").setAttribute("disabled", "disabled");
+    document.getElementById("input-settings-email").setAttribute("disabled", "disabled");
 
     document.getElementById("input-settings-photo").getAttribute("disabled");
     document.getElementById("input-settings-photo-label").getAttribute("disabled");
@@ -38,10 +38,10 @@ document.getElementById("edit-button").addEventListener("click", function() {
 
     document.getElementById("input-settings-photo-label").classList.add("hide");
 
-    // document.getElementById("input-settings-user").getAttribute("disabled");
-    document.getElementById("input-settings-name").getAttribute("disabled");
-    document.getElementById("input-settings-surname").getAttribute("disabled");
-    document.getElementById("input-settings-email").getAttribute("disabled");
+    // document.getElementById("input-settings-user").setAttribute("disabled", "disabled");
+    document.getElementById("input-settings-name").setAttribute("disabled", "disabled");
+    document.getElementById("input-settings-surname").setAttribute("disabled", "disabled");
+    document.getElementById("input-settings-email").setAttribute("disabled", "disabled");
 
     document.getElementById("input-settings-photo").getAttribute("disabled");
     document.getElementById("input-settings-photo-label").getAttribute("disabled");

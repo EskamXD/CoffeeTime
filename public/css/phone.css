@@ -353,9 +353,18 @@ input[type="radio"]:checked ~ label {
 /*========================================*/
 .mobile-display-full {
   width: 100%;
+  padding: 20px 0 20px 0;
 }
 .mobile-display-none {
   display: none;
+}
+
+/*========================================*/
+/* P */
+/*========================================*/
+.profile {
+  width: 50vw;
+  height: 50vw;
 }
 
 /*========================================*/

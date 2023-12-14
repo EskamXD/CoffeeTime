@@ -1,5 +1,8 @@
 <?php
-    session_start();
+    // Start session
+    // session_start();
+    // var_dump($_SESSION);
+    // die();
 
     if(!isset($_SESSION['user'])) {
         header("Location: login");
@@ -23,14 +26,12 @@
 </head>
 
 <body>
-    <?php 
-        var_dump($_SESSION);
-        var_dump($_FILES);
-    ?>
     <!-- Top arrow -->
     <?php include 'public/views/top-arrow.php'; ?>
     <!-- Navbar -->
     <?php include 'public/views/navbar.php'; ?>
+
+    <?php //var_dump($_SESSION); ?>
     <!-- Title content -->
     <main class="content-row screen-height">
         <div class="content-column half-smaller screen-height mobile-display-none">
@@ -84,6 +85,9 @@
     </main>
     <!-- Footer -->
     <?php include 'public/views/footer.php'; ?>
+
+    <?php echo '<p id="user-id" hidden>' . $_SESSION["user_id"] . '</p>'; ?>
 </body>
 <script src="public/scripts/buttons.js"></script>
+<script src="public/scripts/photoChange.js"></script>
 </html>

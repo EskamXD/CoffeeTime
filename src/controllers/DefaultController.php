@@ -1,5 +1,4 @@
 <?php
-
 require_once 'AppController.php';
 
 class DefaultController extends AppController {
@@ -13,7 +12,7 @@ class DefaultController extends AppController {
     }
     
     public function index() {
-        $this->render('home', []);
+        $this->render('home', ["messages" => ["Tutaj zaczyna się dobra znajomość..."]]);
     }
 
     public function info() {
@@ -33,7 +32,7 @@ class DefaultController extends AppController {
     }
 
     public function notification() {
-        $this->render('notification', []);
+        $this->render('notification', ["messages" => ["O cholera, nic tu jeszcze nie ma..."]]);
     }
 
     public function registerPage() {

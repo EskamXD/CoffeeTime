@@ -23,12 +23,10 @@ class DatabaseController extends AppController{
             // Display or log the error information for debugging
             echo "SQL Error | ";
             var_dump($errorInfo[2]);
+            echo "<br>Params | ";
+            var_dump($params);
             die();
         }
-        
-        // echo 'Execute | ';
-        // var_dump($stmt, $stmtStatus);
-        // die();
         
         return $stmt;
     }

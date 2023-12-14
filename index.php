@@ -1,7 +1,7 @@
 <?php 
-// Rozpocznij sesję
-session_start();
+// error_reporting(E_ERROR | E_PARSE);
 
+session_start();
 
 require 'Routing.php';
 
@@ -20,11 +20,11 @@ Routing::get('notification', 'DefaultController');
 Routing::get('registerPage', 'DefaultController');
 Routing::get('settings', 'DefaultController');
 
-Routing::post('login', 'SecurityController');
-// Routing::post('logout', 'SecurityController');
-Routing::post('register', 'SecurityController');
-
+Routing::post('bookForm', 'AccountController');
 Routing::post('updateAccount', 'AccountController');
+// Routing::post('getPhotoNameToJs', 'PhotoController');
+Routing::post('login', 'SecurityController');
+Routing::post('register', 'SecurityController');
 
 Routing::run($path);
 ?>

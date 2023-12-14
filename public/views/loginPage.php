@@ -1,12 +1,12 @@
 <?php
     // Ustaw nazwę sesji (jeśli potrzebujesz zmienić domyślną nazwę "PHPSESSID")
     // session_name("UserSession");
-    session_start();
+    // session_start();
 
     // session_set_cookie_params($sessionParams);
-    setcookie(session_name(), session_id(), 3600, '/', 'localhost', true, true);
+    // setcookie(session_name(), session_id(), 3600, '/', 'localhost', true, true);
 
-    $securityController = new SecurityController();
+    // $securityController = new SecurityController();
 ?>
 
 <html>
@@ -44,11 +44,11 @@
             <form class="content-column gap-h-5" action="login" method="POST">
                 <h1>Zaloguj się</h1>
                 <div class="relative">
-                    <input type="text" name="login-input" placeholder="Login" required> 
+                    <input type="text" name="login" placeholder="Login" required> 
                     <span class="border"></span>
                 </div>
                 <div class="relative">
-                    <input type="password" name="password-input" placeholder="Hasło" required>
+                    <input type="password" name="password" placeholder="Hasło" required>
                     <span class="border"></span>
                 </div>
                 <!-- <div class="g-signin2" data-onsuccess="onSignIn" style="width: 350px; height: 70px; border-radius: 20px !important;"></div> -->

@@ -3,15 +3,14 @@
 require_once 'src/repositories/Repo.php';
 
 class PhotoRepo extends Repo {
-    public function updatePhoto($userId, $photo_name) {
-        // Dodanie zdjęcia do bazy danych.
-        $sql = "INSERT INTO photos (user_id, name) VALUES (:userId, :photo_name)";
+    public function addPhoto($userId, $photoName) {
+        $sql = "INSERT INTO photos (user_id, photo_name) VALUES (:user_id, :photo_name)";
         $params = array(
-            ':userId' => $userId,
-            ':photo_name' => $photo_name,
+            ':user_id' => $userId,
+            ':photo_name' => $photoName,
         );
 
-        $this->db->execute($sql, $params);
+        $this->databaseController->execute($sql, $params); 
     }
 
     public function deletePhoto($photoId) {
@@ -19,17 +18,21 @@ class PhotoRepo extends Repo {
         $sql = "DELETE FROM photos WHERE id = :photoId";
         $params = array(':photoId' => $photoId);
 
-        $this->db->execute($sql, $params);
+        $this->databaseController->execute($sql, $params);
     }
 
-    public function getPhotos($userId) {
+    public function getPhoto($userId) {
         // Pobranie wszystkich zdjęć użytkownika o określonym $user_id.
         $sql = "SELECT * FROM photos WHERE user_id = :userId";
         $params = array(':userId' => $userId);
 
-        $stmt = $this->db->execute($sql, $params);
+        $stmt = $this->databaseController->execute($sql, $params);
         $photos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return $photos;
+        if(!$photos) {
+            return null;
+        }
+
+        return $photos[0]['photo_name'];
     }
 }

@@ -1,7 +1,3 @@
-<?php
-    session_start();
-?>
-
 <html>
 
 <head>
@@ -26,7 +22,15 @@
     <!-- Title content -->
     <main class="content-flex screen-height">
         <div class="content-column">
-            <h1>Tutaj zaczyna się dobra znajomość...</h2>
+            <h1>
+                <?php 
+                    if(isset($messages)) {
+                        foreach($messages as $message) {
+                            echo $message;
+                        }
+                    }
+                ?>
+            </h1>
             <!-- Social media icons -->
             <div class="content-row content-around">
                 <a href="https://www.facebook.com/Urban4G" class="icon hover-scale" target="_blank"><img
