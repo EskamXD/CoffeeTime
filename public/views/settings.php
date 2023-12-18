@@ -40,7 +40,7 @@
         </div>
         <div class="content-column half-bigger screen-height bg-white round-left mobile-display-full">
             <!-- Form using function updateAccount from AccountController -->
-            <form id="account" class="content-column gap-h-5" action="updateAccount" method="POST" enctype="multipart/form-data">
+            <form id="account" class="content-column gap-h-5" action="updateAccountForm" method="POST" enctype="multipart/form-data">
                 <h3 class="black">Konto</h3>
                 <div class="content-column gap-h-5">
                     <?php 

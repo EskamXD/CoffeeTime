@@ -32,7 +32,11 @@ class DefaultController extends AppController {
     }
 
     public function notification() {
-        $this->render('notification', ["messages" => ["O cholera, nic tu jeszcze nie ma..."]]);
+        $this->render('notification', []);
+    }
+
+    public function notificationCheck() {
+        $this->render('notificationCheck', []);
     }
 
     public function registerPage() {

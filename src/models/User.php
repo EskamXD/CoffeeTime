@@ -10,9 +10,6 @@ class User {
     private $room_number;
 
     public function __construct(int $id, string $email, string $login, string $password, string $name, string $surname, int $room_number) {
-        // echo 'User constructor | ';
-        // var_dump($id, $email, $login, $password, $name, $surname);
-        // die();
         $this->id = $id;
         $this->email = $email;
         $this->login = $login;
@@ -23,9 +20,6 @@ class User {
     }
 
     public function getId(): int {
-        // echo 'getId | ';
-        // var_dump($this->id, (int)$this->id);
-        // die();
         return $this->id;
     }
 

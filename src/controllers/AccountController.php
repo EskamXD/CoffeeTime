@@ -6,7 +6,7 @@ require_once 'src/controllers/AppController.php';
 require_once 'src/controllers/PhotoController.php';
 require_once 'src/controllers/MatchController.php';
 require_once 'src/repositories/BookRepo.php';
-require_once 'src/repositories/UserRepo.php'; // Dodaj nowy plik dla UserRepo, gdzie zdefiniowana jest klasa UserRepo
+require_once 'src/repositories/UserRepo.php'; 
 
 class AccountController extends AppController {
     const PHOTO_PATH = 'public/uploads/';
@@ -17,6 +17,9 @@ class AccountController extends AppController {
     private $photoRepo;
     private $userRepo;
 
+    /**
+     * AccountController constructor.
+     */
     public function __construct() {
         parent::__construct();
         $this->matchController = new MatchController();
@@ -26,7 +29,12 @@ class AccountController extends AppController {
         $this->userRepo = new UserRepo();
     }
 
-    public function updateAccount() {
+    /**
+     * @return void
+     * 
+     * Aktualizuje dane uytkownika w bazie danych i na stronie
+     */
+    public function updateAccountForm(): void {
         if ($this->isPost()) {
             // Jeśli przekazano plik, dodaj go do zdjęć
             if (isset($_FILES['profilePhoto']) || $_FILES['profilePhoto']['error'] != 0) {
@@ -70,21 +78,33 @@ class AccountController extends AppController {
         }
     }
 
-    public function bookForm() {
-        $this->bookRepo->addBooking($_SESSION['user_id'], $_POST['date'], $_POST['time-from'], $_POST['time-upto'], $_POST['room-number'], intval($_POST['room-preferences']), 0);
+    /**
+     * @return void
+     * 
+     * Obsługuje formularz do umawiania spotkań
+     */
+    public function bookForm(): void {
+        $timeStart = gmdate($_POST['time-start'].':00');
+        $timeEnd = gmdate($_POST['time-end'].':00');
+
+        $this->bookRepo->addBooking($_SESSION['user_id'], $_POST['date'], $timeStart, $timeEnd, $_POST['room-number'], intval($_POST['room-preferences']), 0);
 
         $userBookings = $this->bookRepo->getAllUserBookings($_SESSION['user_id']);
         $notUserBookings = $this->bookRepo->getAllNotUserBookings($_SESSION['user_id']);
 
         $matchArray = $this->matchController->findMatchingTimeSlot($userBookings, $notUserBookings);
+
+        echo '<br><br>';
         var_dump($matchArray);
-        die();
 
         if (empty($matchArray)) {
             $this->render('book', ["messages" => ["Umówiono spotkanie!"]]);
+            exit();
         }
 
-        $this->matchController->addFinalMeeting($matchArray);
+        $this->matchController->procesFinalMeeting($matchArray);
+        $this->bookRepo->changeBookingStatus($matchArray['book1_id'], 1);
+        $this->bookRepo->changeBookingStatus($matchArray['book2_id'], 1);
 
         $this->render('book', ["messages" => ["Umówiono spotkanie!"]]);
     }

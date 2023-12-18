@@ -19,4 +19,4 @@
 </footer>
 
 <script src="js.js"></script>
-<script src="public/scripts/notificationChecker.js"></script>
+<!-- <script src="public/scripts/notificationChecker.js"></script> -->

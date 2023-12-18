@@ -1,10 +1,14 @@
 <?php
-    if(!isset($_SESSION['user'])) {
-        header("Location: /loginPage");
-    }
+if (!isset($_SESSION['user'])) {
+    header("Location: /loginPage");
+}
+
+require_once 'src/controllers/BookingController.php';
+$bookingController = new BookingController();
 ?>
 
 <html>
+
 <head>
     <!DOCTYPE html>
     <meta charset="UTF-8">
@@ -26,110 +30,145 @@
     <?php include 'public/views/navbar.php'; ?>
     <!-- Title content -->
     <main class="content-flex screen-height">
-        <form class="content-column gap-h-5" action="bookForm" method="POST">
-            <h1>
-                <?php 
-                    if(isset($messages)) {
-                        foreach($messages as $message) {
+        <div class="content-column gap-h-5">
+            <form id="bookForm" class="content-column gap-h-5" action="bookForm" method="POST">
+                <h1>
+                    <?php
+                    if (isset($messages)) {
+                        foreach ($messages as $message) {
                             echo $message;
                         }
                     }
-                ?>
-            </h1>
-            <div class="relative">
-                <input type="date" name="date" value="<?php echo date('Y-m-d');?>" required> 
-                <span class="border"></span>
-            </div>
-            <!-- <div class="content-row content-beetwen">
-                <div class="relative" style="width: 43%;"> 
-                    <input type="text" name="time-from" id="time-from" value="<?php echo date('H:00'); ?>" pattern="^(0[0-9]|1[0-9]|2[0-3]):00" required>
+                    ?>
+                </h1>
+                <div class="relative">
+                    <input type="date" name="date" id="date" value="<?php echo date('Y-m-d'); ?>" required>
                     <span class="border"></span>
                 </div>
-                <div class="relative" style="width: 43%;">
-                    <input type="text" name="time-upto" id="time-upto" value="<?php echo date('H:00'); ?>" pattern="^(0[0-9]|1[0-9]|2[0-3]):00" required>
-                    <span class="border"></span>
-                </div>  
-            </div> -->
-            <div class="content-row content-beetwen">
-                <div class="relative" style="width: 43%;"> 
-                    <select name="hour-from" id="hour-from" required>
-                        <?php
-                        for ($i = 0; $i <= 23; $i++) {
-                            $hour = sprintf("%02d", $i);
-                            echo "<option value=\"$hour\">$hour:00</option>";
-                        }
-                        ?>
-                    </select>
+                <div class="content-row content-beetwen">
+                    <div class="relative" style="width: 43%;">
+                        <select name="time-start" id="time-start" required>
+                            <?php
+                            for ($i = 0; $i <= 23; $i++) {
+                                $hour = sprintf("%02d", $i);
+                                $currentHour = (date('H') + 2) % 24;
+
+
+                                $selected = '';
+                                if ($hour == $currentHour) {
+                                    $selected = 'selected="selected"';
+                                }
+
+                                echo "<option value=\"$hour\" $selected>$hour:00</option>";
+                            }
+                            ?>
+                        </select>
+                        <span class="border"></span>
+                    </div>
+                    <div class="relative" style="width: 43%;">
+                        <select name="time-end" id="time-end" required>
+                            <?php
+                            for ($i = 0; $i <= 23; $i++) {
+                                $hour = sprintf("%02d", $i);
+                                $currentHour = (date('H') + 3) % 24;
+
+                                $selected = '';
+                                if ($hour == $currentHour) {
+                                    $selected = 'selected="selected"';
+                                }
+
+                                echo "<option value=\"$hour\" $selected>$hour:00</option>";
+                            }
+                            ?>
+                        </select>
+                        <span class="border"></span>
+                    </div>
+                </div>
+                <div class="relative">
+                    <input type="text" name="room-number" placeholder="Numer pokoju" value="<?php echo $_SESSION['room_number']; ?>" required>
                     <span class="border"></span>
                 </div>
-                <div class="relative" style="width: 43%;">
-                    <select name="hour-upto" id="hour-upto" required>
-                        <?php
-                        for ($i = 0; $i <= 23; $i++) {
-                            $hour = sprintf("%02d", $i);
-                            echo "<option value=\"$hour\">$hour:00</option>";
-                        }
-                        ?>
-                    </select>
-                    <span class="border"></span>
-                </div>  
-            </div>
-            <div class="relative">
-                <input type="text" name="room-number" placeholder="Numer pokoju" value="<?php echo $_SESSION['room_number'];?>" required>
-                <span class="border"></span>
-            </div>
-            <div class="content-row content-around content-wrap">
-                <label>Zapraszasz do siebie?</label>
-                <div>
-                    <input type="radio" name="room-preferences" id="radio-yes" value="1">
-                    <label for="radio-yes">Tak</label>
+                <div class="content-row content-around content-wrap">
+                    <label>Zapraszasz do siebie?</label>
+                    <div>
+                        <input type="radio" name="room-preferences" id="radio-yes" value="1">
+                        <label for="radio-yes">Tak</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="room-preferences" id="radio-no" value="0" checked>
+                        <label for="radio-no">Nie</label>
+                    </div>
                 </div>
-                <div>
-                    <input type="radio" name="room-preferences" id="radio-no" value="0" checked>
-                    <label for="radio-no">Nie</label>
-                </div>
-            </div>
-            <button id="button" class="hover-scale">Umów się</button>
-        </form>
+            </form>
+            <button class="hover-scale" onclick="validateForm()">Umów się</button>
+        </div>
     </main>
     <!-- Footer -->
     <?php include 'public/views/footer.php'; ?>
 </body>
 <script>
-    // // JS do obsługi wybierania godzin
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     // Funkcja, która usuwa zegar obok pola czasowego i ustawia atrybut type na text
-    //     function removeTimePicker(elementId) {
-    //         var timeInput = document.getElementById(elementId);
-    //         timeInput.type = 'text';
-    //         timeInput.step = '3600'; // Ustawienie kroku co jedną godzinę
-    //         timeInput.addEventListener('input', validateTime); // Dodanie obsługi walidacji
-    //     }
+    function validateForm() {
+        var dateInput = document.getElementById('date').value;
+        var startTime = document.getElementById('time-start').value;
+        var endTime = document.getElementById('time-end').value;
 
-    //     // Funkcja do walidacji, czy godzina "upto" jest większa niż godzina "from"
-    //     function validateTime() {
-    //         var timeFrom = document.getElementById('time-from').value;
-    //         var timeUpto = document.getElementById('time-upto').value;
+        var selectedDateTime = new Date(dateInput + 'T' + startTime + ':00:00');
+        var currentDateTime = new Date();
 
-    //         var isValid = isTimeValid(timeFrom, timeUpto);
+        var formData = new FormData();
+        var id = <?php echo $_SESSION['user_id']; ?>;
+        formData.append('user_id', id);
 
-    //         if (!isValid) {
-    //             alert('Godzina "upto" musi być większa niż godzina "from".');
-    //             // Tutaj możesz dodatkowo zablokować przycisk zapisywania lub podjąć inne działania
-    //         }
-    //     }
+        fetch('checkUserBookings', {
+                method: 'POST',
+                body: formData,
+                credentials: 'include',
+            })
+            .then((response) => response.json())
+            .then(data => {
+                console.log(data);
+                var flag = true;
 
-    //     // Funkcja do sprawdzania, czy godzina "upto" jest większa niż godzina "from"
-    //     function isTimeValid(timeFrom, timeUpto) {
-    //         var timeFromValue = new Date('2000-01-01T' + timeFrom + ':00').getTime();
-    //         var timeUptoValue = new Date('2000-01-01T' + timeUpto + ':00').getTime();
+                if (data.status != 'error') {
+                    var userBookings = data.data;
+                    var userStartDate;
+                    var userEndDate;
+                    var userStartDateTime;
+                    var userEndDateTime;
 
-    //         return timeUptoValue > timeFromValue;
-    //     }
+                    for (var i = 0; i < userBookings.length; i++) {
+                        userStartDate = new Date(userBookings[i].date + 'T' + userBookings[i].time_start);
+                        userEndDate = new Date(userBookings[i].date + 'T' + userBookings[i].time_end);
 
-    //     // Usuwanie zegara obok pól czasowych
-    //     removeTimePicker('time-from');
-    //     removeTimePicker('time-upto');
-    // });
+                        if (selectedDateTime >= userStartDate && selectedDateTime <= userEndDate) {
+                            alert('Masz już umówione spotkanie w tym terminie. Wybierz inną datę i godzinę');
+                            flag = false;
+                            document.getElementById('bookForm').reset();
+                            return;
+                        } else if (selectedDateTime < currentDateTime) {
+                            alert('Nie możesz umówić spotkania w przeszłości');
+                            flag = false;
+                            document.getElementById('bookForm').reset();
+                            return;
+                        } else if (startTime >= endTime) {
+                            alert('Godzina rozpoczęcia nie może być większa lub równa godzinie zakończenia');
+                            flag = false;
+                            document.getElementById('bookForm').reset();
+                            return;
+                        }
+                    }
+
+                }
+                
+                if (flag == true) {
+                    alert('Braun na prezydenta');
+                    document.getElementById('bookForm').submit();
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }
 </script>
+
 </html>

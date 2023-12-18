@@ -4,18 +4,18 @@ class Book {
     private $book_id;
     private $user_id;
     private $date;
-    private $time_from;
-    private $time_upto;
+    private $time_start;
+    private $time_end;
     private $user_room;
     private $room_preference;
     private $used_flag;
 
-    public function __construct(int $book_id, int $user_id, string $date, string $time_from, string $time_upto, string $user_room, string $room_preference, int $used_flag) {
+    public function __construct(int $book_id, int $user_id, string $date, string $time_start, string $time_end, string $user_room, string $room_preference, int $used_flag) {
         $this->book_id = $book_id;
         $this->user_id = $user_id;
         $this->date = $date;
-        $this->time_from = $time_from;
-        $this->time_upto = $time_upto;
+        $this->time_start = $time_start;
+        $this->time_end = $time_end;
         $this->user_room = $user_room;
         $this->room_preference = $room_preference;
         $this->used_flag = $used_flag;
@@ -33,12 +33,12 @@ class Book {
         return $this->date;
     }
 
-    public function getTimeFrom() {
-        return $this->time_from;
+    public function getTimeStart() {
+        return $this->time_start;
     }
 
-    public function getTimeUpto() {
-        return $this->time_upto;
+    public function getTimeEnd() {
+        return $this->time_end;
     }
 
     public function getUserRoom() {
@@ -65,12 +65,12 @@ class Book {
         $this->date = $date;
     }
 
-    public function setTimeFrom(string $time_from) {
-        $this->time_from = $time_from;
+    public function setTimeStart(string $time_start) {
+        $this->time_start = $time_start;
     }
 
-    public function setTimeUpto(string $time_upto) {
-        $this->time_upto = $time_upto;
+    public function setTimeEnd(string $time_end) {
+        $this->time_end = $time_end;
     }
 
     public function setUserRoom(string $user_room) {

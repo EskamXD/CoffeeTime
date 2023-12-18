@@ -1,4 +1,4 @@
-<?php 
+<?php
 // error_reporting(E_ERROR | E_PARSE);
 
 session_start();
@@ -17,14 +17,18 @@ Routing::get('loginPage', 'DefaultController');
 Routing::get('logoutPage', 'DefaultController');
 Routing::get('merch', 'DefaultController');
 Routing::get('notification', 'DefaultController');
+Routing::get('notificationCheck', 'DefaultController');
 Routing::get('registerPage', 'DefaultController');
 Routing::get('settings', 'DefaultController');
 
+Routing::get('checkUserBookings', 'BookingController');
+Routing::get('getUserActiveNotifications', 'NotificationController');
+
 Routing::post('bookForm', 'AccountController');
-Routing::post('updateAccount', 'AccountController');
-// Routing::post('getPhotoNameToJs', 'PhotoController');
+Routing::post('notificationAnswerForm', 'NotificationController');
+Routing::post('updateAccountForm', 'AccountController');
+
 Routing::post('login', 'SecurityController');
 Routing::post('register', 'SecurityController');
 
 Routing::run($path);
-?>

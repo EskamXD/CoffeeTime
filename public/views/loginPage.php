@@ -38,7 +38,7 @@
     <!-- Title content -->
     <main class="content-row full-screen">
         <div class="content-flex full-screen half-bigger bg-white round-right mobile-display-none">
-            <img src="public/icons/webp_compressed/coffee-cup.webp" alt="Photo" loading="lazy" class="image-round">
+            <img src="public/icons/webp_compressed/coffee-cup.webp" alt="Photo" loading="lazy" class="image-round profile">
         </div>
         <div class="content-column half-smaller">
             <form class="content-column gap-h-5" action="login" method="POST">

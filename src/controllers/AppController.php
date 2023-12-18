@@ -19,6 +19,9 @@ class AppController {
         $templatePath = 'public/views/'.$template.'.php';
         $output = 'File not found';
 
+        // var_dump($templatePath);
+        // die();
+        
         if(file_exists($templatePath)) {
             extract($variables);
 

@@ -36,11 +36,11 @@
                 <span class="border"></span>
             </div>
             <div class="relative">
-                <input type="password" id="password" name="register-password" placeholder="Hasło" required> 
+                <input type="password" id="password" name="password" placeholder="Hasło" required> 
                 <span class="border"></span>
             </div>
             <div class="relative">
-                <input type="password" id="password-check" name="register-password-check" placeholder="Powtórz hasło" required> 
+                <input type="password" id="password-check" name="password-check" placeholder="Powtórz hasło" required> 
                 <span class="border"></span>
             </div>
             <p id="password-error" class="error-message"></p>
