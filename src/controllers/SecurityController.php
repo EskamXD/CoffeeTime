@@ -1,22 +1,20 @@
 <?php
 
-require_once 'AppController.php';
-// require_once 'DatabaseController.php';
-// require_once 'PhotoController.php';
-require_once __DIR__.'/../repositories/PhotoRepo.php';
-require_once __DIR__.'/../repositories/UserRepo.php';
-// require_once __DIR__.'/../models/User.php';
+require_once 'src/controllers/AppController.php';
+
+require_once 'src/repositories/PhotoRepo.php';
+require_once 'src/repositories/UserRepo.php';
+
 
 class SecurityController extends AppController {
     const PHOTO_PATH = 'public/uploads/';
 
-    // private $databaseController;
     private $photoRepo;
     private $userRepo;
 
     public function __construct() {
         parent::__construct();
-        // $this->databaseController = new DatabaseController();
+        
         $this->photoRepo = new PhotoRepo();
         $this->userRepo = new UserRepo();
     }

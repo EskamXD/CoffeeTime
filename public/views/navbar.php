@@ -35,7 +35,7 @@
             <!-- Login and Notification icon -->
             <div class="hover-scale">
                 <div id="notification-number" class="content-column notification-icon hide"></div>
-                <a href="/notificationCheck" class="icon"><img src="public/icons/oryginal/notification-white.png"
+                <a href="notifications" class="icon"><img src="public/icons/oryginal/notification-white.png"
                 alt="Notification icon"></a>
             </div>
             <?php

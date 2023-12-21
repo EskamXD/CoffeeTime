@@ -8,12 +8,23 @@ require_once 'Config.php';
 class DatabaseController extends AppController{
     private $db;
 
+    /**
+     * DatabaseController constructor.
+     */
     public function __construct() {
         // Ustaw połączenie z bazą danych (dostosuj do własnych parametrów).
         $this->db = new PDO('pgsql:host='.HOST.';port='.PORT.';dbname='.DBNAME, USERNAME, PASSWORD, ["sslmode" => "prefer"]);
     }
     
-    public function execute($sql, $params) {
+    /**
+     * @param $sql
+     * @param $params
+     * 
+     * @return PDOStatement
+     * 
+     * Wykonaj zapytanie SQL z parametrami $params.
+     */
+    public function execute($sql, $params): PDOStatement {
         // Wykonaj zapytanie SQL z parametrami $params.
         $stmt = $this->db->prepare($sql);
         $stmtStatus = $stmt->execute($params);
@@ -31,7 +42,12 @@ class DatabaseController extends AppController{
         return $stmt;
     }
 
-    public function testConnection() {
+    /**
+     * @return void
+     * 
+     * Test połączenia z bazą danych.
+     */
+    public function testConnection(): void {
         $stmt = $this->db->prepare("SELECT * FROM users");
         $stmt->execute();
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);

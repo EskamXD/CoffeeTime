@@ -40,47 +40,49 @@
         </div>
         <div class="content-column half-bigger screen-height bg-white round-left mobile-display-full">
             <!-- Form using function updateAccount from AccountController -->
-            <form id="account" class="content-column gap-h-5" action="updateAccountForm" method="POST" enctype="multipart/form-data">
-                <h3 class="black">Konto</h3>
-                <div class="content-column gap-h-5">
-                    <?php 
-                        echo '<img class="image-circle black profile" src="'.$_SESSION['profilePhoto'].'" alt="Profilowe">';
-                    ?>
-                    <label id="input-settings-photo-label" class="content-flex button black hover-scale hide" disabled>
-                        <input id="input-settings-photo" type="file" name="profilePhoto" class="hide" disabled>
-                        Zmień zdjęcie
-                    </label>
+            <div class="content-column gap-h-5">
+                <form id="accountForm" class="content-column gap-h-5" method="POST" enctype="multipart/form-data">
+                    <h3 class="black">Konto</h3>
+                    <div class="content-column gap-h-5">
+                        <?php 
+                            echo '<img class="image-circle black profile" src="'.$_SESSION['profilePhoto'].'" alt="Profilowe">';
+                        ?>
+                        <label id="input-settings-photo-label" class="content-flex button black hover-scale hide" disabled>
+                            <input id="input-settings-photo" type="file" name="profilePhoto" class="hide" disabled>
+                            Zmień zdjęcie
+                        </label>
+                    </div>
+                    <div class="content-row content-beetwen relative">
+                        <?php
+                            echo '  <input id="input-settings-user" type="text" name="user" placeholder="'.$_SESSION['user'].'" disabled>
+                                    <span class="border black"></span>';
+                        ?>
+                    </div>
+                    <div class="content-row content-beetwen relative">
+                        <?php
+                            echo '  <input id="input-settings-name" type="text" name="name" placeholder="'.$_SESSION['name'].'" disabled>
+                                    <span class="border black"></span>';
+                        ?>
+                    </div>
+                    <div class="content-row content-beetwen relative">
+                        <?php
+                            echo '  <input id="input-settings-surname" type="text" name="surname" placeholder="'.$_SESSION['surname'].'" disabled>
+                                    <span class="border black"></span>';
+                        ?>
+                    </div>
+                    <div class="content-row content-beetwen relative">
+                        <?php
+                            echo '  <input id="input-settings-email" type="email" name="email" placeholder="'.$_SESSION['email'].'" disabled>
+                                    <span class="border black"></span>';
+                        ?>
+                    </div>
+                </form>
+                <div class="content-row content-around" style="width: 350px;">
+                    <button id="edit-button" class="black hover-scale">Edytuj</button>
+                    <button id="save-button" class="black hover-scale hide" onclick="formAccept()">Zapisz</button>
+                    <button id="cancel-button" class="cancel hover-scale hide" onclick="formReset()">Anuluj</button>
                 </div>
-                <div class="content-row content-beetwen relative">
-                    <?php
-                        echo '  <input id="input-settings-user" type="text" name="user" placeholder="'.$_SESSION['user'].'" disabled>
-                                <span class="border black"></span>';
-                    ?>
-                </div>
-                <div class="content-row content-beetwen relative">
-                    <?php
-                        echo '  <input id="input-settings-name" type="text" name="name" placeholder="'.$_SESSION['name'].'" disabled>
-                                <span class="border black"></span>';
-                    ?>
-                </div>
-                <div class="content-row content-beetwen relative">
-                    <?php
-                        echo '  <input id="input-settings-surname" type="text" name="surname" placeholder="'.$_SESSION['surname'].'" disabled>
-                                <span class="border black"></span>';
-                    ?>
-                </div>
-                <div class="content-row content-beetwen relative">
-                    <?php
-                        echo '  <input id="input-settings-email" type="email" name="email" placeholder="'.$_SESSION['email'].'" disabled>
-                                <span class="border black"></span>';
-                    ?>
-                </div>
-                <div class="content-row content-around">
-                    <button id="edit-button" class="black hover-scale" type="button">Edytuj</button>
-                    <button id="save-button" class="black hover-scale hide" type="submit">Zapisz</button>
-                    <button id="cancel-button" class="cancel hover-scale hide" type="reset">Anuluj</button>
-                </div>
-            </form>
+            </div>
         </div>
     </main>
     <!-- Footer -->
@@ -90,4 +92,67 @@
 </body>
 <script src="public/scripts/buttons.js"></script>
 <script src="public/scripts/photoChange.js"></script>
+<script>
+    function formAccept() {
+        var name = document.getElementById("input-settings-name").value;
+        var surname = document.getElementById("input-settings-surname").value;
+        var email = document.getElementById("input-settings-email").value;
+        
+        if (name == "") {
+            name = document.getElementById("input-settings-name").placeholder;
+        }
+        if (surname == "") {
+            surname = document.getElementById("input-settings-surname").placeholder;
+        }
+        if (email == "") {
+            email = document.getElementById("input-settings-email").placeholder;
+        }
+        
+        var formData = new FormData();
+        formData.append("name", name);
+        formData.append("surname", surname);
+        formData.append("email", email);
+        
+        fetch('updateAccountForm', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+        
+        
+        var photo = document.getElementById("input-settings-photo");
+        var file = photo.files[0];
+        console.log(file);
+
+        if (photo.files.length != 0) {
+            var formData = new FormData();
+            formData.append("profilePhoto", photo.files[0]);
+            
+            fetch('addPhotoForm', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                location.reload();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    }
+
+    function formReset() {
+        var form = document.getElementById("accountForm");
+        account.reset();
+    }
+
+</script>
 </html>

@@ -3,6 +3,7 @@
     --creamy: #edc098;
     --dirty-white: #ebebeb;
     --gray: #85888c;
+    --green: #00cc00;
     --red: #e60000;
     --white: #f9f9f9;
 }
@@ -221,6 +222,10 @@ button.cancel {
 .content-left {
     justify-content: flex-start;
 }
+.content-start {
+    align-items: flex-start;
+}
+
 
 /*========================================*/
 /* F */

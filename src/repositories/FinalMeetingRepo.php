@@ -36,7 +36,7 @@ class FinalMeetingRepo extends Repo {
      * 
      * Zwraca id spotkania
      */
-    public function getFinalMeetingId($book1_id, $book2_id, $date, $time, $room): int {
+    public function getMeetingId($book1_id, $book2_id, $date, $time, $room): int {
         $sql = "SELECT meeting_id FROM meetings WHERE book1_id = :book1_id AND book2_id = :book2_id AND date = :date AND time = :time AND room = :room";
         $params = array(
             ':book1_id' => $book1_id,
@@ -63,8 +63,21 @@ class FinalMeetingRepo extends Repo {
      * 
      * Zwraca spotkanie o podanym id
      */
-    public function getFinalMeeting($meeting_id): array {
+    public function getMeeting($meeting_id): array {
         $sql = "SELECT * FROM meetings WHERE meeting_id = :meeting_id";
+        $params = array(
+            ':meeting_id' => $meeting_id
+        );
+
+        $stmt = $this->databaseController->execute($sql, $params);
+
+        $meeting = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $meeting;
+    }
+
+    public function getMeetingAndUsers($meeting_id): array {
+        $sql = 'SELECT * FROM public."finalMeetingView" WHERE meeting_id = :meeting_id';
         $params = array(
             ':meeting_id' => $meeting_id
         );

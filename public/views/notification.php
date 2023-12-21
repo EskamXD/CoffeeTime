@@ -18,8 +18,8 @@
     <?php include 'public/views/top-arrow.php'; ?>
     <?php include 'public/views/navbar.php'; ?>
 
-    <main class="contenf-flex screen-height">
-        <div class="content-column">
+    <main class="content-flex content-start screen-height">
+        <div class="content-column mobile-display-full">
             <h1>
                 <?php
                 if (isset($messages)) {
@@ -29,16 +29,24 @@
                 }
                 ?>
             </h1>
-            <div class="content-column gap-h-5" style="padding-bottom: 5vh;">
+            <div class="content-column gap-h-5 mobile-display-full" style="padding-bottom: 5vh;">
                 <?php
-                // const PHOTO_PATH = 'public/uploads/';
+                const PHOTO_PATH = 'public/uploads/';
+                $userAcceptedRepo = new UserAcceptedRepo();
 
                 if (isset($notifications)) {
                     foreach ($notifications as $notification) {
-                        echo '<div class="content-column content-wrap gap-h-5 notification-card" style="width:50vw">';
+                        $currentuserAnswer = $userAcceptedRepo->getUserAnswer($notification['meeting_id'], $_SESSION['user_id']);
+                        $oppositeUserAnswer = $userAcceptedRepo->getUserAnswer($notification['meeting_id'], $notification['user_id']);
+
+                        if ($currentuserAnswer == 1 && $oppositeUserAnswer == 1) {
+                            echo '<div class="content-column content-wrap gap-h-5 mobile-display-full notification-card" style="width:80vw; border: var(--green) 5px solid">';
+                        } else {
+                            echo '<div class="content-column content-wrap gap-h-5 mobile-display-full notification-card" style="width:80vw;">';
+                        }
                         echo '<div class="content-column gap-h-5">';
                         echo '<h3 class="black">Spotkanie z użytkownikiem ' . $notification['user'] . '</h3>';
-                        echo '<div class="content-row gap-h-5">';
+                        echo '<div class="content-row content-wrap gap-h-5">';
                         if ($notification['photo'] == null) {
                             echo '<img src="' . PHOTO_PATH . 'default.png" class="image-circle profile black" alt="Zdjęcie użytkownika">';
                         } else {
@@ -50,16 +58,15 @@
                         echo '</div>';
                         echo '</div>';
                         echo '</div>';
-                        $userAcceptedRepo = new UserAcceptedRepo();
-                        $userAnswer = $userAcceptedRepo->getUserAnswer($notification['meeting_id'], $_SESSION['user_id']);
-                        if ($userAnswer == 0) {
-                            echo '<form class="content-row gap-h-5" action="notificationAnswerForm" method="post">';
-                            echo '<input type="hidden" name="meeting-id" value="' . $notification['meeting_id'] . '">';
-                            echo '<button id="save-button" name="button-answer" class="black hover-scale" value="' . $notification['meeting_id'] . '" type="submit">Potwierdź</button>';
-                            echo '<button id="cancel-button" name="button-answer" class="cancel hover-scale" value="-1" type="submit">Odmów</button>';
-                            echo '</form>';
-                        } else if ($userAnswer == 1) {
+                        if ($currentuserAnswer == 0) {
+                            echo '<div class="content-row content-wrap gap-h-5">';
+                            echo '<button id="save-button" name="button-answer" class="black hover-scale" onclick="notificationAnswer('. $notification['meeting_id'] .', 1)">Potwierdź</button>';
+                            echo '<button id="cancel-button" name="button-answer" class="cancel hover-scale" onclick="notificationAnswer('. $notification['meeting_id'] .', -1)">Odmów</button>';
+                            echo '</div>';
+                        } else if ($currentuserAnswer == 1 && $oppositeUserAnswer == 0) {
                             echo '<h4 class="black">Potwierdzono spotkanie</h4>';
+                        } else if ($currentuserAnswer == 1 && $oppositeUserAnswer == 1) {
+                            echo '<h4 class="black" style="color: var(--green);">Spotkanie w realizacji</h4>';
                         }
                         echo '</div>';
                     }
@@ -70,5 +77,55 @@
 
     <?php include 'public/views/footer.php'; ?>
 </body>
+<script>
+    function notificationAnswer(meetingId, answer){
+        var formData = new FormData();
+        formData.append('meeting_id', meetingId);
+        var status = "";
+        var oppositeUser = 0;
 
+        if (answer == -1) {
+            fetch ('bookAgain', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.json())
+            .then(data => {
+                console.log(data);
+                status = data.status;
+                oppositeUser = data.data;
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        } else {
+            
+            fetch ('notificationAnswer', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+
+        if (status == "success") {
+            fromData.append('user_id', oppositeUser);
+            fetch ('procesFinalMeeting', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+
+        location.reload();
+    }
+</script>
 </html>

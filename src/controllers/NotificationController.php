@@ -1,12 +1,17 @@
 <?php
 
 require_once 'src/controllers/AppController.php';
+
+require_once 'src/repositories/BookRepo.php';
 require_once 'src/repositories/FinalMeetingRepo.php';
 require_once 'src/repositories/UserAcceptedRepo.php';
 
 class NotificationController extends AppController {
+
     private $bookRepo;
     private $finalMeetingRepo;
+    private $photoRepo;
+    private $userRepo;
     private $userAcceptedRepo;
 
     /**
@@ -14,8 +19,11 @@ class NotificationController extends AppController {
      */
     public function __construct() {
         parent::__construct();
+
         $this->bookRepo = new BookRepo();
         $this->finalMeetingRepo = new FinalMeetingRepo();
+        $this->photoRepo = new PhotoRepo();
+        $this->userRepo = new UserRepo();
         $this->userAcceptedRepo = new UserAcceptedRepo();
     }
 
@@ -30,7 +38,7 @@ class NotificationController extends AppController {
      * Dodaje powiadomienie o spotkaniu dla uytkowników do bazy danych
      */
     public function sendNotification($book1_id, $book2_id, $date, $start_time, $room): void {
-        $meeting_id = $this->finalMeetingRepo->getFinalMeetingId($book1_id, $book2_id, $date, $start_time, $room);
+        $meeting_id = $this->finalMeetingRepo->getMeetingId($book1_id, $book2_id, $date, $start_time, $room);
 
         $user1_id = $this->bookRepo->getBook($book1_id)['user_id'];
         $user2_id = $this->bookRepo->getBook($book2_id)['user_id'];
@@ -81,14 +89,14 @@ class NotificationController extends AppController {
         if (count($meetingsArray) == 0) {
             $response = [
                 'status' => 'error',
-                'message' => 'Brak powiadomień',
+                'message' => 'NotificationController->getUserActiveNotifications(): Brak powiadomień',
                 'data' => null
             ];
         }
         else {
             $response = [
                 'status' => 'success',
-                'message' => 'Pobrano powiadomienia',
+                'message' => 'NotificationController->getUserActiveNotifications(): Pobrano powiadomienia',
                 'data' => $meetingsArray
             ];
         }
@@ -97,26 +105,67 @@ class NotificationController extends AppController {
         exit;
     }
 
-    public function notificationAnswerForm() {
-        if (!isset($_POST['meeting-id'])) {
-            header('Location: /notificationCheck');
+    /**
+     * @return void
+     * 
+     * Zmienia status powiadomienia na zaakceptowane
+     */
+    public function notificationAnswer(): void {
+        if ($this->isPost()) {
+            if (!isset($_POST['meeting_id'])) {
+                header('Location: /notifications');
+                exit;
+            }
+
+            $meetingId = intval($_POST['meeting_id']);
+
+            $this->userAcceptedRepo->updateUserAccepted($meetingId, $_SESSION['user_id'], true);
+
+            header('Location: /notifications');
             exit();
         }
+    }
 
-        $meetingId = intval($_POST['meeting-id']);
-        $buttonAnswer = intval($_POST['button-answer']);
+    /**
+     * @return void
+     * 
+     * Wyświetla widok z powiadomieniami
+     */
+    public function notifications(): void {
+        // Pobierz powiadomienia użytkownika
+        $meetingsArray = self::getUserNotifications($_SESSION['user_id']);
 
-        if ($buttonAnswer == -1) {
-            $this->userAcceptedRepo->deleteUserAccepted($meetingId);
-            $this->finalMeetingRepo->deleteFinalMeeting($meetingId);
-            $this->bookRepo->deleteBookingByUserId($_SESSION['user_id']);
-            header('Location: /notificationCheck');
-            exit();
-        } 
+        // Pobierz szczegółowe informacje o spotkaniach
+        $meetings = [];
+        foreach ($meetingsArray as $meeting_id) {
+            $meetings[] = $this->finalMeetingRepo->getMeeting($meeting_id);
+        }
+        $this->finalMeetingRepo->__destruct();
 
-        $this->userAcceptedRepo->updateUserAccepted($meetingId, $_SESSION['user_id'], true);
+        // Pobierz informacje o użytkownikach
+        $notifications = [];
 
-        header('Location: /notificationCheck');
-        exit();
+        foreach ($meetings as $meeting) {
+            $user1_id = $this->bookRepo->getBook($meeting['book1_id'])['user_id'];
+            $user2_id = $this->bookRepo->getBook($meeting['book2_id'])['user_id'];
+
+            $user_id = ($user1_id == $_SESSION['user_id']) ? $user2_id : $user1_id;
+
+            $user = $this->userRepo->getUser($user_id);
+
+            $userInfo = [
+                'meeting_id' => $meeting['meeting_id'],
+                'user' => $user->getName() . ' ' . $user->getSurname(),
+                'photo' => $this->photoRepo->getPhoto($user->getId()),
+                'date' => $meeting['date'],
+                'start_time' => $meeting['time'],
+                'room' => $meeting['room'],
+                'user_id' => $user_id
+            ];
+
+            $notifications[] = $userInfo;
+        }
+
+        $this->render('notification', ['notifications' => $notifications]);
     }
 }

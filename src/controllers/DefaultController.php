@@ -1,5 +1,5 @@
 <?php
-require_once 'AppController.php';
+require_once 'src/controllers/AppController.php';
 
 class DefaultController extends AppController {
 

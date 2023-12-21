@@ -1,21 +1,29 @@
-<?php 
+<?php
 
 require_once 'src/controllers/AppController.php';
 require_once 'src/controllers/NotificationController.php';
+
+require_once 'src/repositories/BookRepo.php';
 require_once 'src/repositories/FinalMeetingRepo.php';
 
-class MatchController extends AppController {
+class MatchController extends AppController
+{
 
-    private $finalMeetingRepo;
     private $notificationController;
+
+    private $bookRepo;
+    private $finalMeetingRepo;
 
     /**
      * MatchController constructor.
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
-        $this->finalMeetingRepo = new FinalMeetingRepo();
         $this->notificationController = new NotificationController();
+
+        $this->bookRepo = new BookRepo();
+        $this->finalMeetingRepo = new FinalMeetingRepo();
     }
 
     /**
@@ -25,29 +33,44 @@ class MatchController extends AppController {
      * 
      * Zwraca tablicę z informacjami o spotkaniu, jeśli istnieje
      */
-    public function findMatchingTimeSlot($userBookings, $notUserBookings): array {
+    public function findMatchingTimeSlot($userId): array
+    {
+        $userBookings = $this->bookRepo->getAllUserBookings($userId);
+        $notUserBookings = $this->bookRepo->getAllNotUserBookings($userId);
+
         var_dump($userBookings, $notUserBookings);
         if (empty($userBookings) || empty($notUserBookings)) {
             return array();
         }
+
+
         foreach ($userBookings as $userBooking) {
+
+            if ($userBooking['used_flag'] == true) {
+                continue;
+            }
+            var_dump($userBooking);
+
             foreach ($notUserBookings as $notUserBooking) {
-                if ($userBooking['used_flag'] == true || $notUserBooking['used_flag'] == true) {
-                    break;
+
+                if ($userBooking['used_flag'] == true) {
+                    continue;
                 }
+                var_dump($notUserBooking);
+
                 $userStartDate = strtotime($userBooking['date'] . ' ' . $userBooking['time_start']);
                 $userEndDate = strtotime($userBooking['date'] . ' ' . $userBooking['time_end']);
-    
+
                 $notUserStartDate = strtotime($notUserBooking['date'] . ' ' . $notUserBooking['time_start']);
                 $notUserEndDate = strtotime($notUserBooking['date'] . ' ' . $notUserBooking['time_end']);
-    
+
                 if (
                     $userBooking['date'] == $notUserBooking['date'] &&
                     ($userStartDate <= $notUserEndDate && $userEndDate >= $notUserStartDate)
                 ) {
                     $room1 = $userBooking['room_preference'];
                     $room2 = $notUserBooking['room_preference'];
-                    
+
                     if ($room1 === $room2) {
                         $chosenRoom = mt_rand(0, 1) == 0 ? $userBooking['user_room'] : $notUserBooking['user_room'];
                     } elseif ($room1 == 1) {
@@ -66,9 +89,9 @@ class MatchController extends AppController {
                 }
             }
         }
-    
+
         return [];
-    }    
+    }
 
     /**
      * @param array $matchArray
@@ -76,9 +99,37 @@ class MatchController extends AppController {
      * 
      * Dodaje spotkanie do bazy danych i wysyła powiadomienie
      */
-    public function procesFinalMeeting($matchArray) {
+    public function procesFinalMeeting()
+    {
+        $userId = $_POST['user_id'];
+        
+        // Find new meeting for opposite user
+        $matchArray = self::findMatchingTimeSlot($userId);
+
+        if (empty($matchArray)) {
+            $response = [
+                'status' => 'error',
+                'message' => 'MatchController->procesFinalMeeting(): Nie znaleziono nowego spotkania',
+                'data' => [$matchArray, $userId]
+            ];
+            echo json_encode($response);
+            exit();
+        }
+
         $this->finalMeetingRepo->addFinalMeeting($matchArray['book1_id'], $matchArray['book2_id'], $matchArray['date'], $matchArray['start_time'], $matchArray['room']);
 
+        $this->bookRepo->changeBookingStatus($matchArray['book1_id'], 1);
+        $this->bookRepo->changeBookingStatus($matchArray['book2_id'], 1);
+
         $this->notificationController->sendNotification($matchArray['book1_id'], $matchArray['book2_id'], $matchArray['date'], $matchArray['start_time'], $matchArray['room']);
+
+        $response = [
+            'status' => 'success',
+            'message' => 'MatchController->procesFinalMeeting(): Umówiono spotkanie!',
+            'data' => null
+        ];
+
+        echo json_encode($response);
+        exit();
     }
-}    
+}

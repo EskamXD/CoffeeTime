@@ -115,11 +115,16 @@ $bookingController = new BookingController();
         var selectedDateTime = new Date(dateInput + 'T' + startTime + ':00:00');
         var currentDateTime = new Date();
 
-        var formData = new FormData();
         var id = <?php echo $_SESSION['user_id']; ?>;
+
+        var formData = new FormData();
         formData.append('user_id', id);
 
-        fetch('checkUserBookings', {
+        var flag = true;
+        var temp
+
+        // Check if user has already booked a meeting in selected date and time
+        temp = fetch('checkUserBookings', {
                 method: 'POST',
                 body: formData,
                 credentials: 'include',
@@ -127,7 +132,7 @@ $bookingController = new BookingController();
             .then((response) => response.json())
             .then(data => {
                 console.log(data);
-                var flag = true;
+                let flag = true;
 
                 if (data.status != 'error') {
                     var userBookings = data.data;
@@ -143,31 +148,79 @@ $bookingController = new BookingController();
                         if (selectedDateTime >= userStartDate && selectedDateTime <= userEndDate) {
                             alert('Masz już umówione spotkanie w tym terminie. Wybierz inną datę i godzinę');
                             flag = false;
-                            document.getElementById('bookForm').reset();
-                            return;
+                            break
                         } else if (selectedDateTime < currentDateTime) {
                             alert('Nie możesz umówić spotkania w przeszłości');
                             flag = false;
-                            document.getElementById('bookForm').reset();
-                            return;
+                            break
                         } else if (startTime >= endTime) {
                             alert('Godzina rozpoczęcia nie może być większa lub równa godzinie zakończenia');
                             flag = false;
-                            document.getElementById('bookForm').reset();
-                            return;
+                            break
                         }
                     }
 
                 }
-                
+
                 if (flag == true) {
                     alert('Braun na prezydenta');
-                    document.getElementById('bookForm').submit();
+                    return true;
+                } else {
+                    document.getElementById('bookForm').reset();
+                    return false;
                 }
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
+
+        temp.then((result) => {
+            // console.log(result);
+            if (result == true) {
+                formData = new FormData();
+                formData.append('date', dateInput);
+                formData.append('time-start', startTime);
+                formData.append('time-end', endTime);
+                formData.append('room-number', <?php echo $_SESSION['room_number']; ?>);
+                formData.append('room-preferences', document.querySelector('input[name="room-preferences"]:checked').value);
+
+
+                // Make a booking for the user
+                temp = fetch('bookForm', {
+                        method: 'POST',
+                        body: formData,
+                        credentials: 'include',
+                    })
+                    .then((response) => response.json())
+                    .then(data => {
+                        console.log(data);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data:', error);
+                    });
+
+                formData = new FormData();
+                formData.append('user_id', id);
+
+                // If success, book a meeting for the user
+                fetch('procesFinalMeeting', {
+                        method: 'POST',
+                        body: formData,
+                        credentials: 'include',
+                    })
+                    .then((response) => response.text())
+                    .then(data => {
+                        console.log(data);
+                        if (data.status == 'success') {
+                            alert('Umówiono spotkanie');
+                            window.location.href = 'notifications';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data:', error);
+                    });
+            }
+        }); 
     }
 </script>
 

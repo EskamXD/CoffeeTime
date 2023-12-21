@@ -9,4 +9,9 @@ class Repo {
         // Ustaw połączenie z bazą danych (dostosuj do własnych parametrów).
         $this->databaseController = new DatabaseController();
     }
+
+    public function __destruct()
+    {
+        $this->databaseController = null;
+    }
 }
