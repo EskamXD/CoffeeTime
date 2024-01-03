@@ -10,7 +10,7 @@
     <meta name="author" content="Kamil Urbanowski">
     <meta name="keywords" content="kawiarnia, kawa, herbata, studenci, portfolio">
 
-    <title>Pokój 315 - Merch</title>
+    <title>CoffeeTime - Merch</title>
     <link rel="icon" href="public/icons/webp_compressed/coffee-cup.webp">
 </head>
 

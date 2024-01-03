@@ -6,11 +6,11 @@
     <meta name="theme-color" content="#edc098">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Strona główna kawiarni Pokój 315">
+    <meta name="description" content="Strona główna kawiarni CoffeeTime">
     <meta name="author" content="Kamil Urbanowski">
     <meta name="keywords" content="kawiarnia, kawa, herbata, studenci, portfolio">
 
-    <title>Pokój 315 - Strona główna</title>
+    <title>CoffeeTime - Strona główna</title>
     <link rel="icon" href="public/icons/webp_compressed/coffee-cup.webp">
 </head>
 

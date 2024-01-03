@@ -8,8 +8,10 @@ class User {
     private $name;
     private $surname;
     private $room_number;
+    private $user_role;
+    private $user_blocked;
 
-    public function __construct(int $id, string $email, string $login, string $password, string $name, string $surname, int $room_number) {
+    public function __construct(int $id, string $email, string $login, string $password, string $name, string $surname, int $room_number, string $user_role = 'user', bool $user_blocked = false) {
         $this->id = $id;
         $this->email = $email;
         $this->login = $login;
@@ -17,6 +19,8 @@ class User {
         $this->name = $name;
         $this->surname = $surname;
         $this->room_number = $room_number;
+        $this->user_role = $user_role;
+        $this->user_blocked = $user_blocked;
     }
 
     public function getId(): int {
@@ -47,6 +51,14 @@ class User {
         return $this->room_number;
     }
 
+    public function getUserRole(): string {
+        return $this->user_role;
+    }
+
+    public function getUserBlocked(): bool {
+        return $this->user_blocked;
+    }
+
     public function setEmail(string $email) {
         $this->email = $email;
     }
@@ -69,5 +81,13 @@ class User {
 
     public function setRoomNumber(int $room_number) {
         $this->room_number = $room_number;
+    }
+
+    public function setUserRole(string $user_role) {
+        $this->user_role = $user_role;
+    }
+
+    public function setUserBlocked(bool $user_blocked) {
+        $this->user_blocked = $user_blocked;
     }
 }

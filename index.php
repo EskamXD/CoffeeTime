@@ -11,6 +11,7 @@ $path = parse_url($path, PHP_URL_PATH);
 // Views
 Routing::get('', 'DefaultController');
 Routing::get('about', 'DefaultController');
+Routing::get('blocked', 'DefaultController');
 Routing::get('book', 'DefaultController');
 Routing::get('index', 'DefaultController');
 Routing::get('info', 'DefaultController');

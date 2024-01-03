@@ -35,6 +35,13 @@ class SecurityController extends AppController {
             return;
         }
 
+        if ($user['user_blocked'] == true) {
+            session_unset();
+            session_destroy();
+            header('Location: /blocked');
+            exit;
+        }
+
         self::setSessionParams($user);
 
         $photo = $this->photoRepo->getPhoto($user->getId());
