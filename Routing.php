@@ -1,6 +1,7 @@
 <?php
 
 require_once 'src/controllers/AccountController.php';
+require_once 'src/controllers/AdminController.php';
 require_once 'src/controllers/BookingController.php';
 require_once 'src/controllers/DefaultController.php';
 require_once 'src/controllers/NotificationController.php';

@@ -132,6 +132,17 @@ class NotificationController extends AppController {
      * Wyświetla widok z powiadomieniami
      */
     public function notifications(): void {
+        if (!isset($_SESSION['user'])) {
+            header('Location: /loginPage');
+            exit;
+        }
+        $user = $this->userRepo->getUser($_SESSION['user_id']);
+        if ($user->getUserBlocked()) {
+            session_unset();
+            session_destroy();
+            header('Location: /blocked');
+            exit;
+        }
         // Pobierz powiadomienia użytkownika
         $meetingsArray = self::getUserNotifications($_SESSION['user_id']);
 

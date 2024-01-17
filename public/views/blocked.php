@@ -1,3 +1,16 @@
+<?php
+if (!isset($_SESSION['user'])) {
+    header("Location: loginPage");
+}
+require_once 'src/repositories/UserRepo.php';
+$userRepo = new UserRepo();
+$user = $userRepo->getUser($_SESSION['user_id']);
+if (!$user->getUserBlocked()) {
+    header("Location: index");
+    exit;
+}
+?>
+
 <html>
 
 <head>
@@ -25,9 +38,11 @@
             <h1>
                 Twoje konto zostało zablokowane przez administratora.
             </h1>
-            <h2>
-                Jeżeli uważasz to za błąd, skontaktuj się <a href="mailto: kamil.urbanowski@student.pk.edu.pl">z nami<a>.
-            </h2>
+            <p>
+                Jeżeli uważasz, że to błąd, <a href="mailto: kamil.urbanowski@student.pk.edu.pl" style="text-decoration: underline;">skontaktuj się z nami<a>.
+            </p>
+        </div>
+    </main>
     <!-- Footer -->
     <?php include 'public/views/footer.php'; ?>
 </body>

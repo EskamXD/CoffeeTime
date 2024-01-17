@@ -1,16 +1,22 @@
 <?php
-    // Start session
-    // session_start();
-    // var_dump($_SESSION);
-    // die();
+if (!isset($_SESSION['user'])) {
+    header("Location: /loginPage");
+    exit;
+}
 
-    if(!isset($_SESSION['user'])) {
-        header("Location: login");
-        exit();
-    }
+require_once 'src/repositories/UserRepo.php';
+$UserRepo = new UserRepo();
+$user = $UserRepo->getUser($_SESSION['user_id']);
+if ($user->getUserBlocked()) {
+    session_unset();
+    session_destroy();
+    header('Location: /blocked');
+    exit;
+}
 ?>
 
 <html>
+
 <head>
     <!DOCTYPE html>
     <meta charset="UTF-8">
@@ -31,7 +37,8 @@
     <!-- Navbar -->
     <?php include 'public/views/navbar.php'; ?>
 
-    <?php //var_dump($_SESSION); ?>
+    <?php //var_dump($_SESSION); 
+    ?>
     <!-- Title content -->
     <main class="content-row screen-height">
         <div class="content-column half-smaller screen-height mobile-display-none">
@@ -44,8 +51,8 @@
                 <form id="accountForm" class="content-column gap-h-5" method="POST" enctype="multipart/form-data">
                     <h3 class="black">Konto</h3>
                     <div class="content-column gap-h-5">
-                        <?php 
-                            echo '<img class="image-circle black profile" src="'.$_SESSION['profilePhoto'].'" alt="Profilowe">';
+                        <?php
+                        echo '<img class="image-circle black profile" src="' . $_SESSION['profilePhoto'] . '" alt="Profilowe">';
                         ?>
                         <label id="input-settings-photo-label" class="content-flex button black hover-scale hide" disabled>
                             <input id="input-settings-photo" type="file" name="profilePhoto" class="hide" disabled>
@@ -54,25 +61,25 @@
                     </div>
                     <div class="content-row content-beetwen relative">
                         <?php
-                            echo '  <input id="input-settings-user" type="text" name="user" placeholder="'.$_SESSION['user'].'" disabled>
+                        echo '  <input id="input-settings-user" type="text" name="user" placeholder="' . $_SESSION['user'] . '" disabled>
                                     <span class="border black"></span>';
                         ?>
                     </div>
                     <div class="content-row content-beetwen relative">
                         <?php
-                            echo '  <input id="input-settings-name" type="text" name="name" placeholder="'.$_SESSION['name'].'" disabled>
+                        echo '  <input id="input-settings-name" type="text" name="name" placeholder="' . $_SESSION['name'] . '" disabled>
                                     <span class="border black"></span>';
                         ?>
                     </div>
                     <div class="content-row content-beetwen relative">
                         <?php
-                            echo '  <input id="input-settings-surname" type="text" name="surname" placeholder="'.$_SESSION['surname'].'" disabled>
+                        echo '  <input id="input-settings-surname" type="text" name="surname" placeholder="' . $_SESSION['surname'] . '" disabled>
                                     <span class="border black"></span>';
                         ?>
                     </div>
                     <div class="content-row content-beetwen relative">
                         <?php
-                            echo '  <input id="input-settings-email" type="email" name="email" placeholder="'.$_SESSION['email'].'" disabled>
+                        echo '  <input id="input-settings-email" type="email" name="email" placeholder="' . $_SESSION['email'] . '" disabled>
                                     <span class="border black"></span>';
                         ?>
                     </div>
@@ -97,7 +104,7 @@
         var name = document.getElementById("input-settings-name").value;
         var surname = document.getElementById("input-settings-surname").value;
         var email = document.getElementById("input-settings-email").value;
-        
+
         if (name == "") {
             name = document.getElementById("input-settings-name").placeholder;
         }
@@ -107,25 +114,25 @@
         if (email == "") {
             email = document.getElementById("input-settings-email").placeholder;
         }
-        
+
         var formData = new FormData();
         formData.append("name", name);
         formData.append("surname", surname);
         formData.append("email", email);
-        
+
         fetch('updateAccountForm', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-        
-        
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+
         var photo = document.getElementById("input-settings-photo");
         var file = photo.files[0];
         console.log(file);
@@ -133,19 +140,19 @@
         if (photo.files.length != 0) {
             var formData = new FormData();
             formData.append("profilePhoto", photo.files[0]);
-            
+
             fetch('addPhotoForm', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                location.reload();
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    location.reload();
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
         }
     }
 
@@ -153,6 +160,6 @@
         var form = document.getElementById("accountForm");
         account.reset();
     }
-
 </script>
+
 </html>

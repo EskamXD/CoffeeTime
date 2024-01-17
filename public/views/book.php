@@ -2,6 +2,15 @@
 if (!isset($_SESSION['user'])) {
     header("Location: /loginPage");
 }
+require_once 'src/repositories/UserRepo.php';
+$userRepo = new UserRepo();
+$user = $userRepo->getUser($_SESSION['user_id']);
+if ($user->getUserBlocked()) {
+    session_unset();
+    session_destroy();
+    header('Location: /blocked');
+    exit;
+}
 
 require_once 'src/controllers/BookingController.php';
 $bookingController = new BookingController();
@@ -163,7 +172,7 @@ $bookingController = new BookingController();
                 }
 
                 if (flag == true) {
-                    alert('Braun na prezydenta');
+                    // alert('Braun na prezydenta');
                     return true;
                 } else {
                     document.getElementById('bookForm').reset();
@@ -208,10 +217,10 @@ $bookingController = new BookingController();
                         body: formData,
                         credentials: 'include',
                     })
-                    .then((response) => response.text())
+                    .then((response) => response.json())
                     .then(data => {
                         console.log(data);
-                        if (data.status == 'success') {
+                        if (data.status == 'sucess') {
                             alert('Umówiono spotkanie');
                             window.location.href = 'notifications';
                         }
@@ -220,7 +229,7 @@ $bookingController = new BookingController();
                         console.error('Error fetching data:', error);
                     });
             }
-        }); 
+        });
     }
 </script>
 

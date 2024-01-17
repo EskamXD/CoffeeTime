@@ -151,13 +151,10 @@ button {
   cursor: pointer;
   user-select: none;
 }
-/* button.big {
-  border: 6px solid var(--white);
-  border-radius: 50px;
-  padding: 20px 30px 20px 30px;
-  font-size: 36px;
-  font-weight: 400;
-} */
+button.approve {
+  color: var(--green);
+  border-color: var(--green);
+}
 button.black {
   color: var(--black);
   border-color: var(--black);
@@ -249,9 +246,16 @@ form > div {
   height: 100vh;
 }
 
+.full-width {
+  width: 100%;
+}
+
 /*========================================*/
 /* G */
 /*========================================*/
+.gap-h-2 {
+  gap: 2vh;
+}
 .gap-h-5 {
   gap: 5vh;
 }

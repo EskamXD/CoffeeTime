@@ -25,12 +25,9 @@
             <h1>Merch</h1>
             <!-- Social media icons -->
             <div class="content-row content-around">
-                <a href="https://www.facebook.com/Urban4G" class="icon hover-scale" target="_blank"><img
-                        src="public/icons/webp_compressed/facebook.webp" alt="Facebook link"></a>
-                <a href="https://www.instagram.com/urbanseskam/" class="icon hover-scale" target="_blank"><img
-                        src="public/icons/webp_compressed/instagram.webp" alt="Instagram link"></a>
-                <a href="https://twitter.com/EskamXD" class="icon hover-scale" target="_blank"><img
-                        src="public/icons/webp_compressed/twitter.webp" alt="Twitter link"></a>
+                <a href="https://www.facebook.com/Urban4G" class="icon hover-scale" target="_blank"><img src="public/icons/webp_compressed/facebook.webp" alt="Facebook link"></a>
+                <a href="https://www.instagram.com/urbanseskam/" class="icon hover-scale" target="_blank"><img src="public/icons/webp_compressed/instagram.webp" alt="Instagram link"></a>
+                <a href="https://twitter.com/EskamXD" class="icon hover-scale" target="_blank"><img src="public/icons/webp_compressed/twitter.webp" alt="Twitter link"></a>
             </div>
             <div class="arrow">
             </div>
@@ -38,7 +35,9 @@
     </main>
     <!-- Legends section -->
     <section class="content-flex screen-height bg-white">
-        <div class="content-column"><h1 class="black">Tutaj jeszcze nic nie ma, ale może kiedyś? 🤔</h1></div>
+        <div class="content-column">
+            <h1 class="black">Tutaj jeszcze nic nie ma, ale może kiedyś? 🤔</h1>
+        </div>
     </section>
     <!-- Footer -->
     <?php include 'public/views/footer.php'; ?>

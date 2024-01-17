@@ -7,8 +7,16 @@ class DefaultController extends AppController {
         $this->render('about', []);
     }
 
+    public function admin() {
+        $this->render('admin', []);
+    }
+
     public function book() {
         $this->render('book', ["messages" => ["Umów się!"]]);
+    }
+
+    public function blocked() {
+        $this->render('blocked', []);
     }
     
     public function index() {
@@ -33,10 +41,6 @@ class DefaultController extends AppController {
 
     public function notification() {
         $this->render('notification', []);
-    }
-
-    public function notificationCheck() {
-        $this->render('notificationCheck', []);
     }
 
     public function registerPage() {

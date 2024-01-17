@@ -11,6 +11,7 @@ $path = parse_url($path, PHP_URL_PATH);
 // Views
 Routing::get('', 'DefaultController');
 Routing::get('about', 'DefaultController');
+Routing::get('admin', 'DefaultController');
 Routing::get('blocked', 'DefaultController');
 Routing::get('book', 'DefaultController');
 Routing::get('index', 'DefaultController');
@@ -25,6 +26,7 @@ Routing::get('settings', 'DefaultController');
 
 // Fetch functions
 Routing::post('addPhotoForm', 'PhotoController');
+Routing::post('adminForm', 'AdminController');
 Routing::post('bookForm', 'BookingController');
 Routing::post('bookAgain', 'BookingController');
 Routing::post('checkUserBookings', 'BookingController');
