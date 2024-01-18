@@ -61,29 +61,29 @@ Upon successful matching of two users, they receive a notification. The notifica
 
 ## CoffeeTime - Frequently Asked Questions (FAQ)
 
-1. How can I use the CoffeeTime application?
+### 1. How can I use the CoffeeTime application?
    To use the CoffeeTime application, you need to create an account through the registration view. After logging in, users can browse pages, make coffee meeting reservations, and manage their profiles.
 
-2. How do I register on CoffeeTime?
+### 2. How do I register on CoffeeTime?
    Go to the registration view and provide your details, including your room/apartment number. After successfully creating an account, you can log in to the application.
 
-3. How can I update my personal information and profile picture?
+### 3. How can I update my personal information and profile picture?
    Access the settings view, where you can edit your details such as name, surname, email, and change your profile picture, visible to other users.
 
-4. How do I make a reservation for a coffee meeting?
+### 4. How do I make a reservation for a coffee meeting?
    Navigate to the booking view, where you can choose a date, time slot, and specify the preferred meeting place (in your room/apartment or elsewhere).
 
-5. What are notifications in CoffeeTime?
+### 5. What are notifications in CoffeeTime?
    Notifications inform about a successful match between two users. Users receive a notification about a planned meeting, with the option to accept or reject the proposal.
 
-6. Can I browse pages without having an account?
+### 6. Can I browse pages without having an account?
    Yes, you can browse pages and access information about the creator without the need for an account. However, to use full features like meeting reservations, logging in is required.
 
-7. How to decline a meeting invitation?
+### 7. How to decline a meeting invitation?
    In the notifications view, upon receiving an invitation, you can choose the option to decline, which will result in not accepting the meeting.
 
-8. Can I change the meeting place after acceptance?
+### 8. Can I change the meeting place after acceptance?
    After accepting a meeting, the place cannot be changed. It's essential to pay attention to the preferred location during the reservation.
 
-9. How to contact CoffeeTime support in case of issues?
+### 9. How to contact CoffeeTime support in case of issues?
    Utilize the "Contact" option on the homepage to send a message to technical support in case of problems or questions related to the application.
