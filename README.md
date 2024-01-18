@@ -9,6 +9,7 @@ It's simple time management system which helps people with integration during dr
 - Configuration
 - Application Features
 - FAQ
+- ERD Diagram
 - Maintainers
 
 ## Requirements
@@ -87,3 +88,7 @@ Upon successful matching of two users, they receive a notification. The notifica
 
 ### 9. How to contact CoffeeTime support in case of issues?
    Utilize the "Contact" option on the homepage to send a message to technical support in case of problems or questions related to the application.
+
+## ERD Diagram
+![image](https://github.com/EskamXD/CoffeeTime/assets/58010243/b6bb8ef3-8bc6-4b18-a4e6-89da5ca4aa71)
+
