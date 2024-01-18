@@ -30,7 +30,7 @@ class SecurityController extends AppController {
             return;
         }
         
-        var_dump($_POST['password'], $user->getPassword(), password_verify($_POST['password'], $user->getPassword()));
+        // var_dump($_POST['password'], $user->getPassword(), password_verify($_POST['password'], $user->getPassword()));
         if (!password_verify($_POST['password'], $user->getPassword())) {
             $this->render('loginPage', ['messages' => ['Nieprawidłowe hasło!']]);
             return;
