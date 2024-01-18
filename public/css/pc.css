@@ -155,6 +155,10 @@ button.big {
     font-size: 36px;
     font-weight: 400;
 }
+button.approve {
+    color: var(--green);
+    border-color: var(--green);
+}
 button.black {
     color: var(--black);
     border-color: var(--black);
@@ -163,6 +167,7 @@ button.cancel {
     color: var(--red);
     border-color: var(--red);
 }
+
 
 #button-arrow {
     border: solid var(--black);
@@ -242,9 +247,16 @@ form > div {
     height: 100vh;
 }
 
+.full-width {
+    width: 100%;
+}
+
 /*========================================*/
 /* G */
 /*========================================*/
+.gap-h-2 {
+    gap: 2vh;
+}
 .gap-h-5 {
     gap: 5vh;
 }

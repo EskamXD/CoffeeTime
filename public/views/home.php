@@ -6,11 +6,11 @@
     <meta name="theme-color" content="#edc098">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Strona główna kawiarni Pokój 315">
+    <meta name="description" content="Strona główna kawiarni CoffeeTime">
     <meta name="author" content="Kamil Urbanowski">
     <meta name="keywords" content="kawiarnia, kawa, herbata, studenci, portfolio">
 
-    <title>Pokój 315 - Strona główna</title>
+    <title>CoffeeTime - Strona główna</title>
     <link rel="icon" href="public/icons/webp_compressed/coffee-cup.webp">
 </head>
 
@@ -23,22 +23,19 @@
     <main class="content-flex screen-height">
         <div class="content-column">
             <h1>
-                <?php 
-                    if(isset($messages)) {
-                        foreach($messages as $message) {
-                            echo $message;
-                        }
+                <?php
+                if (isset($messages)) {
+                    foreach ($messages as $message) {
+                        echo $message;
                     }
+                }
                 ?>
             </h1>
             <!-- Social media icons -->
             <div class="content-row content-around">
-                <a href="https://www.facebook.com/Urban4G" class="icon hover-scale" target="_blank"><img
-                        src="public/icons/webp_compressed/facebook.webp" alt="Facebook link"></a>
-                <a href="https://www.instagram.com/urbanseskam/" class="icon hover-scale" target="_blank"><img
-                        src="public/icons/webp_compressed/instagram.webp" alt="Instagram link"></a>
-                <a href="https://twitter.com/EskamXD" class="icon hover-scale" target="_blank"><img
-                        src="public/icons/webp_compressed/twitter.webp" alt="Twitter link"></a>
+                <a href="https://www.facebook.com/Urban4G" class="icon hover-scale" target="_blank"><img src="public/icons/webp_compressed/facebook.webp" alt="Facebook link"></a>
+                <a href="https://www.instagram.com/urbanseskam/" class="icon hover-scale" target="_blank"><img src="public/icons/webp_compressed/instagram.webp" alt="Instagram link"></a>
+                <a href="https://twitter.com/EskamXD" class="icon hover-scale" target="_blank"><img src="public/icons/webp_compressed/twitter.webp" alt="Twitter link"></a>
             </div>
             <div class="arrow">
             </div>
@@ -50,7 +47,7 @@
             <div class="content-column content-beetwen gap-h-10">
                 <div class="content-column">
                     <h2 class="black">Kawusia studencka</h3>
-                    <p class="black">Potrzebujesz z kimś pogadać, wypić dobrą kawę?</p>
+                        <p class="black">Potrzebujesz z kimś pogadać, wypić dobrą kawę?</p>
                 </div>
                 <div class="content-flex">
                     <a href="/book"><button class="big black hover-scale">Umów się na kawę</button></a>
@@ -62,8 +59,7 @@
         </div>
     </section>
     <!-- Scrolling background, coffee price -->
-    <section class="content-flex screen-height"
-        style="background-image: url('public/images/webp_compressed/coffee2.webp'); background-attachment: fixed; background-size: cover;">
+    <section class="content-flex screen-height" style="background-image: url('public/images/webp_compressed/coffee2.webp'); background-attachment: fixed; background-size: cover;">
         <div class="content-column gap-h-10">
             <div class="content-column">
                 <h2>Nie masz jeszcze konta?</h2>

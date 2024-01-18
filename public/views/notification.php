@@ -60,8 +60,8 @@
                         echo '</div>';
                         if ($currentuserAnswer == 0) {
                             echo '<div class="content-row content-wrap gap-h-5">';
-                            echo '<button id="save-button" name="button-answer" class="black hover-scale" onclick="notificationAnswer('. $notification['meeting_id'] .', 1)">Potwierdź</button>';
-                            echo '<button id="cancel-button" name="button-answer" class="cancel hover-scale" onclick="notificationAnswer('. $notification['meeting_id'] .', -1)">Odmów</button>';
+                            echo '<button id="save-button" name="button-answer" class="black hover-scale" onclick="notificationAnswer(' . $notification['meeting_id'] . ', 1)">Potwierdź</button>';
+                            echo '<button id="cancel-button" name="button-answer" class="cancel hover-scale" onclick="notificationAnswer(' . $notification['meeting_id'] . ', -1)">Odmów</button>';
                             echo '</div>';
                         } else if ($currentuserAnswer == 1 && $oppositeUserAnswer == 0) {
                             echo '<h4 class="black">Potwierdzono spotkanie</h4>';
@@ -78,54 +78,55 @@
     <?php include 'public/views/footer.php'; ?>
 </body>
 <script>
-    function notificationAnswer(meetingId, answer){
+    function notificationAnswer(meetingId, answer) {
         var formData = new FormData();
         formData.append('meeting_id', meetingId);
         var status = "";
         var oppositeUser = 0;
 
         if (answer == -1) {
-            fetch ('bookAgain', {
-                method: 'POST',
-                body: formData
-            }).then(response => response.json())
-            .then(data => {
-                console.log(data);
-                status = data.status;
-                oppositeUser = data.data;
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+            fetch('bookAgain', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    status = data.status;
+                    oppositeUser = data.data;
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
         } else {
-            
-            fetch ('notificationAnswer', {
-                method: 'POST',
-                body: formData
-            }).then(response => response.json())
-            .then(data => {
-                console.log(data);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+
+            fetch('notificationAnswer', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
         }
 
         if (status == "success") {
             fromData.append('user_id', oppositeUser);
-            fetch ('procesFinalMeeting', {
-                method: 'POST',
-                body: formData
-            }).then(response => response.json())
-            .then(data => {
-                console.log(data);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+            fetch('procesFinalMeeting', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
         }
 
         location.reload();
     }
 </script>
+
 </html>

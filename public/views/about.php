@@ -10,7 +10,7 @@
     <meta name="author" content="Kamil Urbanowski">
     <meta name="keywords" content="kawiarnia, kawa, herbata, studenci, portfolio">
 
-    <title>Pokój 315 - O nas</title>
+    <title>CoffeeTime - O nas</title>
     <link rel="icon" href="public/icons/webp_compressed/coffee-cup.webp">
 </head>
 
@@ -26,12 +26,9 @@
             <h2>Czyli czterej pancerni bez psa</h2>
             <!-- Social media icons -->
             <div class="content-row content-around">
-                <a href="https://www.facebook.com/Urban4G" class="icon hover-scale" target="_blank"><img
-                        src="public/icons/webp_compressed/facebook.webp" alt="Facebook link"></a>
-                <a href="https://www.instagram.com/urbanseskam/" class="icon hover-scale" target="_blank"><img
-                        src="public/icons/webp_compressed/instagram.webp" alt="Instagram link"></a>
-                <a href="https://twitter.com/EskamXD" class="icon hover-scale" target="_blank"><img
-                        src="public/icons/webp_compressed/twitter.webp" alt="Twitter link"></a>
+                <a href="https://www.facebook.com/Urban4G" class="icon hover-scale" target="_blank"><img src="public/icons/webp_compressed/facebook.webp" alt="Facebook link"></a>
+                <a href="https://www.instagram.com/urbanseskam/" class="icon hover-scale" target="_blank"><img src="public/icons/webp_compressed/instagram.webp" alt="Instagram link"></a>
+                <a href="https://twitter.com/EskamXD" class="icon hover-scale" target="_blank"><img src="public/icons/webp_compressed/twitter.webp" alt="Twitter link"></a>
             </div>
             <div class="arrow">
             </div>
@@ -42,8 +39,7 @@
         <div class="content-column content-around screen-height screen-width">
             <h3 class="black">"To my, to my, chłopaki z polibudy..."</h3>
             <div class="iframe-container image-round">
-                <iframe class="iframe-responsive" src="https://www.youtube.com/embed/V7K3OgbdXPw" loading="lazy"
-                    allowfullscreen="true"></iframe>
+                <iframe class="iframe-responsive" src="https://www.youtube.com/embed/V7K3OgbdXPw" loading="lazy" allowfullscreen="true"></iframe>
             </div>
         </div>
     </section>
@@ -61,7 +57,7 @@
             </div>
             <div class="content-column">
                 <h1 class="black">Kamil</h3>
-                <h2 class="black"></h2>
+                    <h2 class="black"></h2>
             </div>
         </div>
     </section>

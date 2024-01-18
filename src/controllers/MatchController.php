@@ -38,7 +38,7 @@ class MatchController extends AppController
         $userBookings = $this->bookRepo->getAllUserBookings($userId);
         $notUserBookings = $this->bookRepo->getAllNotUserBookings($userId);
 
-        var_dump($userBookings, $notUserBookings);
+        // var_dump($userBookings, $notUserBookings);
         if (empty($userBookings) || empty($notUserBookings)) {
             return array();
         }
@@ -49,14 +49,14 @@ class MatchController extends AppController
             if ($userBooking['used_flag'] == true) {
                 continue;
             }
-            var_dump($userBooking);
+            // var_dump($userBooking);
 
             foreach ($notUserBookings as $notUserBooking) {
 
                 if ($userBooking['used_flag'] == true) {
                     continue;
                 }
-                var_dump($notUserBooking);
+                // var_dump($notUserBooking);
 
                 $userStartDate = strtotime($userBooking['date'] . ' ' . $userBooking['time_start']);
                 $userEndDate = strtotime($userBooking['date'] . ' ' . $userBooking['time_end']);
@@ -108,9 +108,9 @@ class MatchController extends AppController
 
         if (empty($matchArray)) {
             $response = [
-                'status' => 'error',
-                'message' => 'MatchController->procesFinalMeeting(): Nie znaleziono nowego spotkania',
-                'data' => [$matchArray, $userId]
+                'status' => 'success',
+                'message' => 'MatchController->procesFinalMeeting(): Nie znaleziono nowego spotkania ale umówiono spotkanie!',
+                'data' => null
             ];
             echo json_encode($response);
             exit();

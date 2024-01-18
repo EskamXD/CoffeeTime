@@ -37,6 +37,7 @@ h2 {
 }
 
 h3,
+h4,
 h5 {
     color: var(--black);
     font-weight: 300;
@@ -44,6 +45,10 @@ h5 {
 
 h3 {
     font-size: 3em;
+}
+
+h4 {
+    font-size: 2.5em;
 }
 
 h5 {

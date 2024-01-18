@@ -30,9 +30,17 @@ class SecurityController extends AppController {
             return;
         }
         
-        if (password_verify($_POST['password'], $user->getPassword())) {
+        var_dump($_POST['password'], $user->getPassword(), password_verify($_POST['password'], $user->getPassword()));
+        if (!password_verify($_POST['password'], $user->getPassword())) {
             $this->render('loginPage', ['messages' => ['Nieprawidłowe hasło!']]);
             return;
+        }
+        
+        if ($user->getUserBlocked() == true) {
+            session_unset();
+            session_destroy();
+            header('Location: /blocked');
+            exit;
         }
 
         self::setSessionParams($user);
@@ -61,14 +69,15 @@ class SecurityController extends AppController {
         }
 
         $login = $_POST['login'];
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         $this->userRepo->createUser(
             $_POST['email'],
             $login,
-            $_POST['password'],
+            $password,
             $_POST['name'],
             $_POST['surname'],
-            $_POST['roomNumber']
+            $_POST['roomNumber'],
         );
 
         self::setSessionParams($this->userRepo->getUserByLogin($login));
@@ -83,6 +92,8 @@ class SecurityController extends AppController {
         $_SESSION['name'] = $user->getName();
         $_SESSION['surname'] = $user->getSurname();
         $_SESSION['room_number'] = $user->getRoomNumber();
+        $_SESSION['user_blocked'] = $user->getUserBlocked();
+        $_SESSION['user_role'] = $user->getUserRole();
         $_SESSION['profilePhoto'] = self::PHOTO_PATH.'default.png';
     }
 }

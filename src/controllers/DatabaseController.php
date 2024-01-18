@@ -33,7 +33,7 @@ class DatabaseController extends AppController{
             $errorInfo = $stmt->errorInfo();
             // Display or log the error information for debugging
             echo "SQL Error | ";
-            var_dump($errorInfo[2]);
+            var_dump($errorInfo);
             echo "<br>Params | ";
             var_dump($params);
             die();
